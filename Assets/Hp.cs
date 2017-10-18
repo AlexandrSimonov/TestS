@@ -28,3 +28,6 @@ public class Hp : MonoBehaviour {
 
     }
 }
+
+[System.Serializable]
+public class HpChangeEvent : UnityEvent<float> {}
