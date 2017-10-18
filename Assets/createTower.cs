@@ -56,26 +56,30 @@ public class createTower : MonoBehaviour {
                 canPos = true;
 
                 for (int i = 0; i < need * need; i++) {
-                    if (arr[i].empty) {
-                        arr[i].TempActive();
+                    if (arr[i] != null) {
+                        if (arr[i].empty) {
+                            arr[i].TempActive();
+                        } else {
+                            arr[i].Busy();
+                            canPos = false;
+                        }
                     } else {
-                        arr[i].Busy();
                         canPos = false;
+
                     }
                 }
+                if (canPos) {
+                    Vector2 corgiPos = origin + new Vector2(circle.radius, -circle.radius) - circle.offset;
 
-                Vector2 corgiPos = origin + new Vector2(circle.radius, -circle.radius) - circle.offset;
+                    corgi.transform.position = corgiPos;
 
-                corgi.transform.position = corgiPos;
-
-                corgi.GetComponent<corgiController>().SetStartPos(corgiPos);
-
+                    corgi.GetComponent<corgiController>().SetStartPos(corgiPos);
+                }
             }
 
             if (Input.GetKeyUp(KeyCode.Mouse0)) {
                 if (canPos) {
                     block = false;
-
                     for (int i = 0; i < need * need; i++) {
                         arr[i].Active();
                     }
@@ -90,7 +94,4 @@ public class createTower : MonoBehaviour {
             }
         }
     }
-
-    
-
 }

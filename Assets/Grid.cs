@@ -41,11 +41,19 @@ public class Grid : MonoBehaviour {
     }
 
     public gridSection GetGridSection(Vector2 vec) {
+        
         vec = startPos - vec;
+
+        Debug.Log(vec);
+
+        if (vec.x >  0 || vec.x <= -place.x || vec.y < 0 || vec.y >= place.y) {
+            return null;
+        }
 
         int x = (int)Mathf.Floor(Mathf.Abs(vec.x) / widthSection);
         int y = (int)Mathf.Floor(Mathf.Abs(vec.y) / widthSection);
 
+        
         return arraySection[y, x];
     }
 
