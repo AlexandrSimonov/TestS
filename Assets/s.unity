@@ -4925,6 +4925,48 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 475759641}
+--- !u!1 &477156769
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 477156771}
+  - component: {fileID: 477156770}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &477156770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 477156769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714f62fc3d39cd409187da4e45e7a1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  notChange: 1
+--- !u!4 &477156771
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 477156769}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6.01, y: 4.87, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1911070624}
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &477650330
 GameObject:
   m_ObjectHideFlags: 0
@@ -7818,6 +7860,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
+  hub: {fileID: 2018914877}
   events:
     m_PersistentCalls:
       m_Calls:
@@ -7832,20 +7875,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 739847391}
-        m_MethodName: HpChange
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
     m_TypeName: HpChangeEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  hub: {fileID: 2018914877}
 --- !u!114 &739847391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7858,6 +7889,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b7c310486f073d4380f3ae3a31a1ea2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  sprite: {fileID: 0}
 --- !u!4 &739847392
 Transform:
   m_ObjectHideFlags: 0
@@ -8307,12 +8340,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
+  hub: {fileID: 0}
   events:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: HpChangeEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  hub: {fileID: 0}
 --- !u!114 &773937897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8335,7 +8368,7 @@ CircleCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 773937893}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -13955,6 +13988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
+  hub: {fileID: 0}
   events:
     m_PersistentCalls:
       m_Calls:
@@ -13971,7 +14005,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: HpChangeEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  hub: {fileID: 0}
 --- !u!58 &1310367696
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -21394,7 +21427,6 @@ GameObject:
   - component: {fileID: 1911070623}
   - component: {fileID: 1911070622}
   - component: {fileID: 1911070621}
-  - component: {fileID: 1911070625}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -21433,25 +21465,13 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1911070620}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.31, y: -0.1, z: -10}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 477156771}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1911070625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1911070620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0714f62fc3d39cd409187da4e45e7a1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  notChange: 1
 --- !u!1 &1923845850
 GameObject:
   m_ObjectHideFlags: 0
