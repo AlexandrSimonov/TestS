@@ -20,11 +20,11 @@ public class WaveControl : MonoBehaviour {
         if (instance.enemies.transform.childCount == 0) {
             instance.OnEnd();
             instance.WaveEnd.Invoke();
-
         }
     }
 
     private void OnEnd() {
         DialogSystem.AddMessage("Конец волны", 4);
+        magicDust.AddMoney(100);
     }
 }
