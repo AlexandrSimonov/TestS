@@ -75,4 +75,16 @@ public class Grid : MonoBehaviour {
         return vec2;
     }
 
+
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = new Color(1, 0, 0);
+        Gizmos.DrawSphere(startPos, 0.2f);
+
+        
+
+        Gizmos.DrawLine(startPos, startPos + new Vector2(place.x, 0));
+        Gizmos.DrawLine(startPos, startPos + new Vector2(0, -place.y));
+        Gizmos.DrawLine(startPos + new Vector2(0, -place.y), startPos + new Vector2(place.x, -place.y));
+        Gizmos.DrawLine(startPos + new Vector2(place.x, 0), startPos + new Vector2(place.x, -place.y));
+    }
 }

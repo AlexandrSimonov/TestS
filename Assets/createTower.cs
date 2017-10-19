@@ -68,13 +68,13 @@ public class createTower : MonoBehaviour {
 
                     }
                 }
-                if (canPos) {
-                    Vector2 corgiPos = origin + new Vector2(circle.radius, -circle.radius) - circle.offset;
 
-                    corgi.transform.position = corgiPos;
+                Vector2 corgiPos = origin + new Vector2(circle.radius, -circle.radius) - circle.offset;
 
-                    corgi.GetComponent<corgiController>().SetStartPos(corgiPos);
-                }
+                corgi.transform.position = corgiPos;
+
+                corgi.GetComponent<corgiController>().SetStartPos(corgiPos);
+                
             }
 
             if (Input.GetKeyUp(KeyCode.Mouse0)) {
