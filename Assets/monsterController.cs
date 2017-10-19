@@ -13,6 +13,11 @@ public class monsterController : MonoBehaviour {
             Debug.LogError("Много компонентов атаки");
         }
     }
+
+    public void OnHpDie() {
+        magicDust.AddMoney(10);
+        WaveControl.MonsterDie();
+    }
 }
 
 
