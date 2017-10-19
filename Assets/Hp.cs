@@ -7,7 +7,8 @@ public class Hp : MonoBehaviour {
 
     public float hp = 0;
     public hub hub;
-    public HpChangeEvent events;
+    public HpChangeEvent hpChangeEvent;
+    public UnityEvent hpDieEvent;
 
     void Start() {
         if (hub != null) {
@@ -15,18 +16,17 @@ public class Hp : MonoBehaviour {
         }
     }
 
+
     public void Minus(float count) {
         hp -= count;
-        events.Invoke(hp);
+        hpChangeEvent.Invoke(hp);
 
-        if (hp > 0) {
-            Debug.Log("Боль");
-        } else {
-            Debug.Log("Уже всё равно");
+        if (hp <= 0) {
+            hpDieEvent.Invoke();
             Destroy(this.gameObject);
         }
     }
 
     [System.Serializable]
-    public class HpChangeEvent : UnityEvent<float> {}
+    public class HpChangeEvent : UnityEvent<float> { }
 }
