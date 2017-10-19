@@ -25,6 +25,8 @@ public class Hp : MonoBehaviour {
             Debug.Log("Уже всё равно");
             Destroy(this.gameObject);
         }
-
     }
+
+    [System.Serializable]
+    public class HpChangeEvent : UnityEvent<float> {}
 }
