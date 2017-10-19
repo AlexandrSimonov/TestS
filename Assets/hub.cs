@@ -31,7 +31,7 @@ public class hub : MonoBehaviour {
 
             ChangeHp(hp.hp);
 
-            hp.hpChangeEvent.AddListener(ChangeHp);
+            hp.OnHpChangeEvent.AddListener(ChangeHp);
         } else {
             Debug.LogError("В объекта родителя нет компонента здоровья");
         }
