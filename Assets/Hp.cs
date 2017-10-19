@@ -10,20 +10,14 @@ public class Hp : MonoBehaviour {
     public HpChangeEvent hpChangeEvent;
     public UnityEvent hpDieEvent;
 
-    void Start() {
-        if (hub != null) {
-            hub.Init(hp, hp);
-        }
-    }
-
 
     public void Minus(float count) {
         hp -= count;
+
         hpChangeEvent.Invoke(hp);
 
         if (hp <= 0) {
             hpDieEvent.Invoke();
-            Destroy(this.gameObject);
         }
     }
 

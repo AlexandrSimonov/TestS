@@ -22,12 +22,21 @@ public class hub : MonoBehaviour {
     private float maxHp;
     private float hpInSection;
 
-    public void Init(float hp, float maxHp) {
-        this.maxHp = maxHp;
-        hpInSection = maxHp / sectionCount;
+    void Start() {
+        Hp hp = transform.parent.GetComponent<Hp>();
 
-        ChangeHp(hp);
+        if (hp != null) {
+            this.maxHp = hp.hp;
+            hpInSection = maxHp / sectionCount;
+
+            ChangeHp(hp.hp);
+
+            hp.hpChangeEvent.AddListener(ChangeHp);
+        } else {
+            Debug.LogError("В объекта родителя нет компонента здоровья");
+        }
     }
+    
 
     public void ChangeHp(float hp) {
         int sectionShow = sectionCount - (int)Mathf.Floor((maxHp - hp) / hpInSection);
