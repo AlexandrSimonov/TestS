@@ -64,14 +64,12 @@ public class controller : MonoBehaviour {
     }
 
     private void move(Vector2 vec) {
-        Vector2 b = new Vector2(0, 0);
         float q = glob.quat * Mathf.PI / 180;
         float sin = Mathf.Sin(q);
         float cos = Mathf.Cos(q);
 
-        b.x = vec.x * cos - vec.y * sin;
-        b.y = vec.x * sin + vec.y * cos;
-
+        Vector2 b = new Vector2(vec.x * cos - vec.y * sin, vec.x * sin + vec.y * cos);
+        
         Debug.DrawLine(transform.position, new Vector2(transform.position.x, transform.position.y) + b);
 
         rigidbody.AddForce(b * speed);
