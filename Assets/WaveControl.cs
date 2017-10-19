@@ -8,18 +8,22 @@ public class WaveControl : MonoBehaviour {
     public GameObject enemies;
     public bool isEnd;
     private static WaveControl instance;
-    public UnityEvent WaveEnd;
+    public UnityEvent OnWaveEnd;
+    public UnityEvent OnWaveStart;
 
     void Start() {
         isEnd = true;
         instance = this;
+    }
+
+    public void WaveStart() {
 
     }
 
     public static void MonsterDie() {
         if (instance.enemies.transform.childCount == 0) {
             instance.OnEnd();
-            instance.WaveEnd.Invoke();
+            instance.OnWaveEnd.Invoke();
         }
     }
 
