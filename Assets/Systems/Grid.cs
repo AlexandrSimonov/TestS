@@ -11,7 +11,7 @@ public class Grid : MonoBehaviour {
     public GameObject obj;
     public GameObject parent;
 
-    private gridSection[,] arraySection;
+    private GridSection[,] arraySection;
 
     private int height;
     private int width;
@@ -27,12 +27,12 @@ public class Grid : MonoBehaviour {
             el.transform.position = new Vector3(vec.x, vec.y, el.transform.position.z);
         }
 
-        arraySection = new gridSection[height, width];
+        arraySection = new GridSection[height, width];
 
         if (widthSection > 0) {
             for (int j = 0; j < height; j++) {
                 for (int i = 0; i < width; i++) {
-                    arraySection[j, i] = Instantiate(obj, startPos + new Vector2(i * widthSection, -j * widthSection) + new Vector2(widthSection / 2, -widthSection / 2), new Quaternion(0, 0, 0, 0), parent.transform).GetComponent<gridSection>();
+                    arraySection[j, i] = Instantiate(obj, startPos + new Vector2(i * widthSection, -j * widthSection) + new Vector2(widthSection / 2, -widthSection / 2), new Quaternion(0, 0, 0, 0), parent.transform).GetComponent<GridSection>();
                     arraySection[j, i].Init(this);
                 }
             }
@@ -40,7 +40,7 @@ public class Grid : MonoBehaviour {
 
     }
 
-    public gridSection GetGridSection(Vector2 vec) {
+    public GridSection GetGridSection(Vector2 vec) {
         vec = startPos - vec;
 
         if (vec.x >  0 || vec.x <= -place.x || vec.y < 0 || vec.y >= place.y) {

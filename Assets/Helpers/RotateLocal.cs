@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class rotateLocal : MonoBehaviour {
+public class RotateLocal : MonoBehaviour {
 
     private float speed = 120;
     private float angle = 0;

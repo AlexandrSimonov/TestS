@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class gridSection : MonoBehaviour {
+public class GridSection : MonoBehaviour {
 
     private SpriteRenderer sprite;
     public bool empty = true;

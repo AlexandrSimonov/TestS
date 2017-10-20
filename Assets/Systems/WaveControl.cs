@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Linq;
 
 public class WaveControl : MonoBehaviour {
 
@@ -36,6 +37,7 @@ public class WaveControl : MonoBehaviour {
         instance = this;
         instance.OnWaveEnd.Invoke();
 
+        GetRandomMonster(4);
     }
 
     public void WaveStart() {
@@ -44,12 +46,23 @@ public class WaveControl : MonoBehaviour {
         int currentStrong = 0;
 
         while (currentStrong != strongWave) {
-            Instantiate(monsters[0].gameObject, zone.GenerateRandomPoint(), new Quaternion(0, 0, 0, 0), parentMonster);
-            currentStrong++;
+            Monster monster = GetRandomMonster(strongWave - currentStrong);
+
+            Instantiate(monster.gameObject, zone.GenerateRandomPoint(), new Quaternion(0, 0, 0, 0), parentMonster);
+
+            currentStrong += monster.strong;
+
             countMonster++;
         }
         
     }
+
+    private Monster GetRandomMonster(int canStrong) {
+        Monster[] canMonsters = monsters.Where(monster => monster.strong <= canStrong).ToArray();
+        
+        return canMonsters[Random.Range(0, canMonsters.Length)];
+    }
+
 
     public static void MonsterDie() {
         instance.countMonster--;
@@ -62,7 +75,7 @@ public class WaveControl : MonoBehaviour {
 
     private void OnEnd() {
         DialogSystem.AddMessage("Конец волны", 4);
-        magicDust.AddMoney(100);
+        MagicDust.AddMoney(100);
         strongWave += 5;
     }
 }

@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class rotateGlobal : MonoBehaviour {
+public class RotateGlobal : MonoBehaviour {
 
-    private rotateLocal[] rotateLocals;
+    private RotateLocal[] rotateLocals;
     public float quat = 0;
     private float block = 0;
 
     private void Start() {
-        rotateLocals = FindObjectsOfType(typeof(rotateLocal)) as rotateLocal[];
+        rotateLocals = FindObjectsOfType(typeof(RotateLocal)) as RotateLocal[];
     }
 
     private void rotates(float angle) {

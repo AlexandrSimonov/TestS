@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class corgiController : MonoBehaviour {
+public class CorgiController : MonoBehaviour {
 
     public GameObject enemy;
     public GameObject eventActive;

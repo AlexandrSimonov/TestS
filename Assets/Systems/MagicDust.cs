@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class magicDust : MonoBehaviour {
+public class MagicDust : MonoBehaviour {
 
     public Text text;
-    private static magicDust instance;
+    private static MagicDust instance;
     private int money;
 
     void Start() {

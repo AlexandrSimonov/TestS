@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class SpecialAtack : Attack {
 
-    public override void AttackUnit() { }
+    public override void AttackUnit(GameObject target) { }
 }

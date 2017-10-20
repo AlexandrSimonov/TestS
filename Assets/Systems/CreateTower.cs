@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class createTower : MonoBehaviour {
+public class CreateTower : MonoBehaviour {
 
     public GameObject prefabCorgi;
     public Camera mainCamera;
@@ -13,7 +13,7 @@ public class createTower : MonoBehaviour {
     private bool block = false;
     private Vector2 origin;
     private GameObject corgi;
-    private gridSection[] arr;
+    private GridSection[] arr;
     private int need;
     private CircleCollider2D circle;
     private bool canPos = true;
@@ -28,7 +28,7 @@ public class createTower : MonoBehaviour {
                     circle = corgi.GetComponent<CircleCollider2D>();
                     circle.enabled = false;
                     grid.ActiveGrid();
-                    corgi.GetComponent<corgiController>().enabled = false;
+                    corgi.GetComponent<CorgiController>().enabled = false;
                     block = true;
                 }
 
@@ -38,7 +38,7 @@ public class createTower : MonoBehaviour {
 
                 // origin округленный
                 if (arr == null) {
-                    arr = new gridSection[need * need];
+                    arr = new GridSection[need * need];
                 }
 
                 for (int i = 0; i < need * need; i++) {
@@ -73,7 +73,7 @@ public class createTower : MonoBehaviour {
 
                 corgi.transform.position = corgiPos;
 
-                corgi.GetComponent<corgiController>().SetStartPos(corgiPos);
+                corgi.GetComponent<CorgiController>().SetStartPos(corgiPos);
                 
             }
 
@@ -85,8 +85,8 @@ public class createTower : MonoBehaviour {
                     }
                     circle.enabled = true;
                     arr = null;
-                    corgi.GetComponent<corgiController>().enabled = true;
-                    corgi.GetComponent<rotateLocal>().rotate(0);
+                    corgi.GetComponent<CorgiController>().enabled = true;
+                    corgi.GetComponent<RotateLocal>().rotate(0);
                     grid.DeActiveGrid();
                 } else {
                     DialogSystem.AddMessage("Тут нельзя разместить", 1);

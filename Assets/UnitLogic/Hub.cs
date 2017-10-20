@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class hub : MonoBehaviour {
+public class Hub : MonoBehaviour {
 
     public int sectionCount;
 

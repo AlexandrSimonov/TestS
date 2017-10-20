@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class controller : MonoBehaviour {
+public class Controller : MonoBehaviour {
 
     public Animator animator;
     public SpriteRenderer sprite;
     public float speed = 5;
     private Rigidbody2D rigidbody;
     public DialogSystem dialog;
-    public rotateGlobal glob;
+    public RotateGlobal glob;
 
     private void Start() {
         rigidbody = GetComponent<Rigidbody2D>();

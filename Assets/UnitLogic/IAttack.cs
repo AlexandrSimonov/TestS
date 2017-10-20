@@ -3,5 +3,5 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public interface IAttack {
-    void AttackUnit();
+    void AttackUnit(GameObject target);
 }
