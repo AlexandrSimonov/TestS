@@ -8,11 +8,22 @@ public class RangeAttack : Attack {
     public float strong = 0;
     public float range = 0;
 
-    void Start() {
+    public Shell shell;
 
+    private IDamaged target;
+    public override void AttackUnit(GameObject target) {
+
+        this.target = target.GetComponent<IDamaged>();
+        
+        if (Vector2.Distance(target.transform.position, transform.position) <= range) {
+            Shell shellObj = Instantiate(shell, transform.position, new Quaternion(), transform);
+            shellObj.Init(target.transform.position, ShellBum);
+        }
     }
 
-    public override void AttackUnit(GameObject target) { }
+    private void ShellBum() {
+        target.Hit(strong, DamageType.Physic);
+    }
 
     void OnDrawGizmosSelected() {
         Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + range, transform.position.y));

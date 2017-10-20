@@ -8,13 +8,14 @@ public class MeleeAttack : Attack {
     public float strong = 0;
     public float range = 0;
 
-    void Start() {
-        
-    }
+    public DamageType damageType;
 
     public override void AttackUnit(GameObject target) {
         if (Vector2.Distance(target.transform.position, transform.position) <= range) {
-            
+            IDamaged damaged = target.GetComponent<IDamaged>();
+            if (damaged != null) {
+                damaged.Hit(strong, damageType);
+            }
         } 
     }
 
