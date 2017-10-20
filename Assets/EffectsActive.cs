@@ -8,8 +8,6 @@ public class EffectsActive : MonoBehaviour {
 
 	void Start() {
         Effects = new List<IEffect>();
-
-        AddEffect(new RegenHp(4, this.gameObject, 20));
 	}
 
     public void AddEffect(IEffect effect) {

@@ -76,7 +76,7 @@ public class Grid : MonoBehaviour {
     }
 
 
-    private void OnDrawGizmosSelected() {
+    private void OnDrawGizmos() {
         Gizmos.color = new Color(1, 0, 0);
         Gizmos.DrawSphere(startPos, 0.2f);
 

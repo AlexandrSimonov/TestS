@@ -11,8 +11,6 @@ public class MonsterSpawnZone : MonoBehaviour {
     public Vector2 startPos2;
     public Vector2 place2;
 
-    public GameObject test;
-
     private Vector2[] arrX;
     private Vector2[] arrY;
 
@@ -29,14 +27,9 @@ public class MonsterSpawnZone : MonoBehaviour {
             new Vector2(startPos1.y, startPos1.y - place1.y),
             new Vector2(startPos1.y - place1.y, startPos2.y - place2.y)
         };
-
-
-        for (int i = 0; i < 100; i++) {
-            Instantiate(test, GenerateRandomPoint(), new Quaternion(0,0,0,0));
-        }
     }
     // Опасно!!! Переделать!!!
-    private Vector2 GenerateRandomPoint() {
+    public Vector2 GenerateRandomPoint() {
         int ranX = Random.Range(0, 3);
 
         Vector2 y;
@@ -60,12 +53,8 @@ public class MonsterSpawnZone : MonoBehaviour {
             Random.Range(y.x, y.y)
         );
     }
-    // Update is called once per frame
-    void Update() {
 
-    }
-
-    private void OnDrawGizmosSelected() {
+    private void OnDrawGizmos() {
         Gizmos.color = new Color(1, 1, 0);
 
         Gizmos.DrawLine(startPos1, startPos1 + new Vector2(place1.x, 0));
