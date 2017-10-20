@@ -12,7 +12,11 @@ public class MeleeAttack : Attack {
         
     }
 
-    public override void AttackUnit(GameObject target) { }
+    public override void AttackUnit(GameObject target) {
+        if (Vector2.Distance(target.transform.position, transform.position) <= range) {
+            
+        } 
+    }
 
     void OnDrawGizmosSelected() {
         Gizmos.DrawLine(transform.position, new Vector2(transform.position.x + range, transform.position.y));

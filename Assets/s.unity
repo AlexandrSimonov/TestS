@@ -12060,6 +12060,7 @@ MonoBehaviour:
       PublicKeyToken=null
   monsters:
   - {fileID: 114170934965104486, guid: f53f7fc52609349469edf5ee44d0d73e, type: 2}
+  - {fileID: 114420772914746082, guid: d7fb2a1fdae53404d9407849726a9073, type: 2}
   parentMonster: {fileID: 1699343549}
 --- !u!114 &1045155240
 MonoBehaviour:

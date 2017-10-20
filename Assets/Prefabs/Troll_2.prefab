@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 114376464447746684}
   - component: {fileID: 114156506028603974}
   - component: {fileID: 114170934965104486}
+  - component: {fileID: 114410324947646810}
   m_Layer: 0
   m_Name: Troll_2
   m_TagString: Untagged
@@ -185,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68e7f2c041e6cd479e737a39fb13f4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strong: 4
+  strong: 1
   monsterName: Troll
 --- !u!114 &114291284251412070
 MonoBehaviour:
@@ -278,6 +279,19 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &114410324947646810
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1916951238921324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84722d7b48095184f82a9ac98b36e080, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physic: 10
+  magic: 10
 --- !u!114 &114608649344176170
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -373,8 +387,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b7c310486f073d4380f3ae3a31a1ea2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 95898719758732804}
-  sprite: {fileID: 212068161489588210}
   speed: 1
   stop: 0
 --- !u!212 &212068161489588210
