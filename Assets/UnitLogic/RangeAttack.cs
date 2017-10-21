@@ -16,7 +16,7 @@ public class RangeAttack : Attack {
         this.target = target.GetComponent<IDamaged>();
         
         if (Vector2.Distance(target.transform.position, transform.position) <= range) {
-            Shell shellObj = Instantiate(shell, transform.position, new Quaternion(), transform);
+            Shell shellObj = Instantiate(shell.gameObject, transform.position, new Quaternion(), transform).GetComponent<Shell>();
             shellObj.Init(target.transform.position, ShellBum);
         }
     }
