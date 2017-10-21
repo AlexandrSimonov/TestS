@@ -19,13 +19,16 @@ public class Shell : MonoBehaviour {
 
     // Он будет лететь в низ геймобжекта(в ноги), нужно как-то обсчитывать чтобы летел в центр
     void Update() {
-        transform.position = Vector2.MoveTowards(transform.position, target, speed);
-        
-        if (Vector2.Distance(transform.position, target) < 0.1f) {
+        if (target != null) {
+            transform.position = Vector2.MoveTowards(transform.position, target, speed);
 
-            myCallback();
+            if (Vector2.Distance(transform.position, target) < 0.1f) {
 
-            Destroy(this.gameObject);
+                myCallback();
+
+                Destroy(this.gameObject);
+            }
         }
+        
     }
 }
