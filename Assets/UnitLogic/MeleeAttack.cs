@@ -4,17 +4,13 @@ using UnityEngine;
 
 [AddComponentMenu("Unit/Attack/MeleeAttack")]
 public class MeleeAttack : Attack {
-
-    public float strong = 0;
-    public float range = 0;
-
-    public DamageType damageType;
-
+    
     public override void AttackUnit(GameObject target) {
-        if (Vector2.Distance(target.transform.position, transform.position) <= range) {
+        if (Vector2.Distance(target.transform.position, transform.position) <= range && Time.time >= timerDelay) {
             IDamaged damaged = target.GetComponent<IDamaged>();
             if (damaged != null) {
                 damaged.Hit(strong, damageType);
+                timerDelay = Time.time + delay;
             }
         } 
     }

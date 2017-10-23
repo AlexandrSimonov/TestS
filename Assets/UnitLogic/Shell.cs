@@ -1,35 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
-
 public class Shell : MonoBehaviour {
 
-    public delegate void WhateverType();
-
-    protected WhateverType callbackFct; 
-
-    private Vector2 target;
+    private GameObject target;
     public float speed;
-    private WhateverType myCallback;
+    private float damage;
+    private DamageType type;
 
-    public void Start() {
-        
-    }
-
-    public void Init(Vector2 target, WhateverType myCallback) {
-        this.myCallback = myCallback;
+    public void Init(GameObject target, float damage, DamageType type) {
         this.target = target;
+        this.damage = damage;
+        this.type = type;
     }
 
     // Он будет лететь в низ геймобжекта(в ноги), нужно как-то обсчитывать чтобы летел в центр
     void Update() {
         if (target != null) {
-            transform.position = Vector2.MoveTowards(transform.position, target, speed);
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed);
 
-            if (Vector2.Distance(transform.position, target) < 0.1f) {
+            if (Vector3.Distance(transform.position, target.transform.position) < 0.1f) {
 
-                myCallback();
+                target.GetComponent<IDamaged>().Hit(damage, type);
 
                 Destroy(this.gameObject);
             }
