@@ -54,7 +54,7 @@ public class MonsterSpawnZone : MonoBehaviour {
         );
     }
 
-    private void OnDrawGizmos() {
+    private void OnDrawGizmosSelected() {
         Gizmos.color = new Color(1, 1, 0);
 
         Gizmos.DrawLine(startPos1, startPos1 + new Vector2(place1.x, 0));

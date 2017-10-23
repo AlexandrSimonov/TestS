@@ -20,7 +20,6 @@ public class Shell : MonoBehaviour {
     public void Init(Vector2 target, WhateverType myCallback) {
         this.myCallback = myCallback;
         this.target = target;
-        Debug.Log("Инит");
     }
 
     // Он будет лететь в низ геймобжекта(в ноги), нужно как-то обсчитывать чтобы летел в центр
