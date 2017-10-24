@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class RangeHook : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-        Debug.Log("Hook");
-
-        Destroy(this);
-	}
+    // Use this for initialization
+    public void AttackMoment() {
+        this.transform.parent.GetComponent<RangeAttack>().AttackMoment();
+    }
 }

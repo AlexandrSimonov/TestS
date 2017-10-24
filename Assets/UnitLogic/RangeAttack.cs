@@ -5,17 +5,21 @@ using UnityEngine;
 [AddComponentMenu("Unit/Attack/RangeAttack")]
 public class RangeAttack : Attack {
 
+
     public Shell shell;
     public Transform pos;
+    public Animator animator;
 
-    private IDamaged target;
+    private GameObject target;
 
     public override void AttackUnit(GameObject target) {
+        animator.SetBool("attack", true);
+        this.target = target;
+    }
 
-        this.target = target.GetComponent<IDamaged>();
-        
-        if (this.target != null && Vector3.Distance(target.transform.position, transform.position) <= range && Time.time >= timerDelay) {
-            Shell shellObj = Instantiate(shell.gameObject, pos.position, new Quaternion()).GetComponent<Shell>();
+    public void AttackMoment() {
+        if (target.GetComponent<IDamaged>() != null && Vector3.Distance(target.transform.position, transform.position) <= range && Time.time >= timerDelay) {
+            Shell shellObj = Instantiate(shell.gameObject, pos.position + new Vector3(0, 0, shell.GetComponent<SphereCollider>().radius), new Quaternion()).GetComponent<Shell>();
             shellObj.Init(target, strong, damageType);
             timerDelay = Time.time + delay;
         }

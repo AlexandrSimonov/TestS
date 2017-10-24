@@ -32,13 +32,11 @@ public class Controller : MonoBehaviour {
     void Update() {
         Reset();
 
-        if (controller.isGrounded) {
-            Move();
+        Move();
 
-            Jump();
-
-            Attack();
-        }
+        Jump();
+        
+        Attack();       
 
         direction.y -= gravity * Time.deltaTime;
         controller.Move(direction * Time.deltaTime);
@@ -55,12 +53,13 @@ public class Controller : MonoBehaviour {
         head.localEulerAngles = new Vector3(-rotationY, 0, 0);
 
         transform.localEulerAngles = new Vector3(0, rotationX, 0);
-        // вектор направления движения
-        direction = new Vector3(h, 0, v);
-        
-        direction = transform.TransformDirection(direction);
-        direction *= speed;
 
+        if (controller.isGrounded) {
+            direction = new Vector3(h, 0, v);
+
+            direction = transform.TransformDirection(direction);
+            direction *= speed;
+        }
         if (h != 0 || v != 0) {
             animator.SetBool("walk", true);
         }
@@ -74,16 +73,14 @@ public class Controller : MonoBehaviour {
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 
             if (Physics.Raycast(ray, out hit)) {
-
                 attackComponent.AttackUnit(hit.transform.gameObject);
-                animator.SetBool("attack", true);
             }
         }
     }
 
     private void Jump() {
-        if (Input.GetButton("Jump"))
-            direction.y = jumpSpeed;
+        if (Input.GetButton("Jump") && controller.isGrounded)
+            direction.y = jumpSpeed;    
     }
 
     private void Reset() {
@@ -91,75 +88,3 @@ public class Controller : MonoBehaviour {
         animator.SetBool("attack", false);
     }
 }
-
-
-
-/*
- * 
- *     private void Attack() {
-        if (Input.GetButton("Fire1")) {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-
-            if (Physics.Raycast(ray, out hit)) {
-
-                attackComponent.AttackUnit(hit.transform.gameObject);
-                animator.SetBool("attack", true);
-            }
-        }
-    }
- * using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Controller : MonoBehaviour {
-
-    public float speed = 6.0F;
-    public float jumpSpeed = 8.0F;
-    public float gravity = 20.0F;
-    private Vector3 moveDirection = Vector3.zero;
-    private IAttack attackComponent;
-    private CharacterController controller;
-
-    private void Start() {
-        controller = GetComponent<CharacterController>();
-
-        attackComponent = GetComponent<IAttack>();
-    }
-
-    void Update() {
-        if (controller.isGrounded) {
-            Move();
-
-            Jump();
-
-            Attack();
-        }
-
-        moveDirection.y -= gravity * Time.deltaTime;
-        controller.Move(moveDirection * Time.deltaTime);
-    }
-
-    private void Move() {
-        moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        moveDirection.Normalize();
-        moveDirection = transform.TransformDirection(moveDirection);
-        moveDirection *= speed;
-    }
-
-    private void Jump() {
-        if (Input.GetButton("Jump"))
-            moveDirection.y = jumpSpeed;
-    }
-
-    private void Attack() {
-        if (Input.GetButtonDown("Fire1")) {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit)) {
-                attackComponent.AttackUnit(hit.transform.gameObject);
-            }
-        }
-    }
-}*/
