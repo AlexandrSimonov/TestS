@@ -26,6 +26,7 @@ public class Hp : MonoBehaviour {
         OnHpChangeEvent.Invoke(hp);
         if (hp <= 0) {
             OnHpDieEvent.Invoke();
+            this.gameObject.SetActive(false);
         }
     }
 

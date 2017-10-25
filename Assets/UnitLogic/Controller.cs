@@ -60,9 +60,12 @@ public class Controller : MonoBehaviour {
             direction = transform.TransformDirection(direction);
             direction *= speed;
         }
+
+        Debug.DrawLine(transform.position, transform.position + direction);
         if (h != 0 || v != 0) {
             animator.SetBool("walk", true);
         }
+
 
     }
 

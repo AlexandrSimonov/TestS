@@ -12,11 +12,12 @@ public class ParticleVisualEffect : MonoBehaviour, IVisualEffect {
 
     public void Active() {
         particle.Play();
+        isStarted = true;
     }
 
     void Update() {
         if (!particle.main.loop && particle.isStopped && isStarted) {
-            Destroy(this.gameObject);
+            Destroy(transform.parent.gameObject);
         }
     }
 }

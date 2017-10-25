@@ -13,6 +13,5 @@ public abstract class Attack : MonoBehaviour, IAttack {
     public DamageType damageType;
 
     public abstract void AttackUnit(GameObject target);
-	
-    
+
 }
