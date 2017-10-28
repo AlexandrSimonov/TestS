@@ -3,16 +3,19 @@ using System.Collections;
 
 public class FireEffect : Effect {
 
-    private Hp hp;
     public float damage;
+    private Hp hp;
 
-    private void Update() {
-        if (Time.time < durationTimer) {
-            hp.Minus(damage * Time.deltaTime);
+    public override void EffectInit() {
+        hp = target.GetComponent<Hp>();
+    }
+
+    public override bool EffectUpdate() {
+        if (TimeEnd <= Time.time) {
+            return true;
         }
+        hp.Minus(damage * Time.deltaTime);
+        return false;
     }
 
-    public override void OnActive() {
-        hp = transform.GetComponent<Hp>();
-    }
 }

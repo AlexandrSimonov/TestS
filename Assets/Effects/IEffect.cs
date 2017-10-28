@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 
 public interface IEffect {
-    void ActiveEffect();
+    void InitEffect(EffectActivate target);
 }

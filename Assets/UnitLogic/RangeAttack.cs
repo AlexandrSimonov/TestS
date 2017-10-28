@@ -12,8 +12,6 @@ public class RangeAttack : Attack {
 
     private GameObject target;
 
-    public GameObject[] effects;
-
     public override void AttackUnit(GameObject target) {
         animator.SetBool("attack", true);
         this.target = target;

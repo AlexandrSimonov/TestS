@@ -10,12 +10,16 @@ public class Shell : MonoBehaviour {
     private float damage;
     private DamageType type;
     public UnityEvent destroyShell;
-    private IEffectActivate[] activateEffects;
+    private IEffect[] activateEffects;
 
     public void Init(GameObject target, float damage, DamageType type) {
         this.target = target;
         this.damage = damage;
         this.type = type;
+
+        activateEffects = GetComponents<IEffect>();
+
+        Debug.Log(activateEffects.Length);
     }
 
     // Он будет лететь в низ геймобжекта(в ноги), нужно как-то обсчитывать чтобы летел в центр
@@ -27,10 +31,14 @@ public class Shell : MonoBehaviour {
 
                 target.GetComponent<IDamaged>().Hit(damage, type);
 
-                foreach (IEffectActivate effect in activateEffects) {
-                    effect.Activate(target);
-                }
+                EffectActivate effAct = target.GetComponent<EffectActivate>();
 
+                if (effAct != null) {
+                    foreach (IEffect effect in activateEffects) {
+                        effect.InitEffect(effAct);
+                    }
+                }
+                
                 destroyShell.Invoke();
                 this.enabled = false;
                 
