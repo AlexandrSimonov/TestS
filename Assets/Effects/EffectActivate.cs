@@ -13,7 +13,9 @@ public class EffectActivate : MonoBehaviour {
     //Нужно будет проверить "участок"
     void Update() {
         for (int i = 0; i < effects.Count; i++) {
-            effects[i].EffectUpdate();
+            if ( effects[i].EffectLoop()) {
+                effects.RemoveAt(i);
+            }
         }
     }
 }

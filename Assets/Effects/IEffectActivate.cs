@@ -4,9 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 
 public interface IEffectActivate{
-    bool EffectUpdate(); // Цикл эффекта, возвращает true если время иссякло
+    
 
-    IEffectActivate InitInActivate (Type type);
+    IEffectActivate InitInActivate ();
+
+    bool EffectLoop();
+
+    void EffectUpdate(); // Цикл эффекта, возвращает true если время иссякло
 
     void EffectInit();
 }

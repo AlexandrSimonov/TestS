@@ -12,15 +12,24 @@ public abstract class Effect : MonoBehaviour, IEffect, IEffectActivate {
     public void InitEffect(EffectActivate target) {
         TimeEnd = Time.time + duration;
         this.target = target.gameObject;
-        target.Init(InitInActivate(target.GetType()));
+        target.Init(InitInActivate());
     }
 
+    public abstract void EffectUpdate();
 
-    public abstract bool EffectUpdate();
+    public bool EffectLoop() {
+        if (TimeEnd <= Time.time) {
+            return true;
+        }
+
+        EffectUpdate();
+
+        return false;
+    }
 
     public abstract void EffectInit();
 
-    public IEffectActivate InitInActivate (Type type) {
+    public IEffectActivate InitInActivate () {
         IEffectActivate effect = this.MemberwiseClone() as IEffectActivate;
 
         effect.EffectInit();

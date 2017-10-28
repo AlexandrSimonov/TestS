@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FireEffect : Effect {
+public class RegenHpEffect : Effect {
 
-    public float damage;
+    public float regen;
     private Hp hp;
 
     public override void EffectInit() {
@@ -11,7 +11,6 @@ public class FireEffect : Effect {
     }
 
     public override void EffectUpdate() {
-        hp.Minus(damage * Time.deltaTime);
+        hp.Plus(regen * Time.deltaTime);
     }
-
 }
