@@ -12,7 +12,12 @@ public abstract class Effect : MonoBehaviour, IEffect, IEffectActivate {
     public void InitEffect(EffectActivate target) {
         TimeEnd = Time.time + duration;
         this.target = target.gameObject;
-        target.Init(InitInActivate());
+
+        if (this.target == null) {
+            throw new Exception("EffectActivate is not gameObject");
+        }
+        
+        target.Init(GetCopyEffect());
     }
 
     public abstract void EffectUpdate();
@@ -27,12 +32,12 @@ public abstract class Effect : MonoBehaviour, IEffect, IEffectActivate {
         return false;
     }
 
-    public abstract void EffectInit();
+    public abstract void OnInitEffect();
 
-    public IEffectActivate InitInActivate () {
+    public IEffectActivate GetCopyEffect() {
         IEffectActivate effect = this.MemberwiseClone() as IEffectActivate;
+        effect.OnInitEffect();
 
-        effect.EffectInit();
         return effect;
     }
 }

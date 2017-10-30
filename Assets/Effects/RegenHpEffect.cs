@@ -6,7 +6,8 @@ public class RegenHpEffect : Effect {
     public float regen;
     private Hp hp;
 
-    public override void EffectInit() {
+    public override void OnInitEffect() {
+        // Если на объекте нет компонента здоровья...
         hp = target.GetComponent<Hp>();
     }
 

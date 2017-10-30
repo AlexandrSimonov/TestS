@@ -6,7 +6,7 @@ public class FireEffect : Effect {
     public float damage;
     private Hp hp;
 
-    public override void EffectInit() {
+    public override void OnInitEffect() {
         hp = target.GetComponent<Hp>();
     }
 

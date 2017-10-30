@@ -4,6 +4,11 @@ using System.Collections;
 public abstract class Item : MonoBehaviour, IItem, IActivated{
 
     public string itemName;
+    public Texture sprite;
+    public bool stacked; // Могут ли несколько одинаковых предметов данного типа стакаться
+    // Вот это поле показывать если stacked == true;
+    public int stackedMax;
+    public int stackedNow;
 
     public abstract void GetInfo();
 

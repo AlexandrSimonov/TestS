@@ -6,11 +6,11 @@ using System.Collections.Generic;
 public interface IEffectActivate{
     
 
-    IEffectActivate InitInActivate ();
+    //IEffectActivate InitInActivate (); // Переименовать
 
-    bool EffectLoop();
+    bool EffectLoop(); // Цикл который определяет, закончилось ли событие
 
     void EffectUpdate(); // Цикл эффекта, возвращает true если время иссякло
 
-    void EffectInit();
+    void OnInitEffect(); // "Событие", которое вызывается после иницилизации объекта
 }
