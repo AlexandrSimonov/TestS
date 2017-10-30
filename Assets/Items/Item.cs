@@ -8,7 +8,11 @@ public abstract class Item : MonoBehaviour, IItem, IActivated{
     public bool stacked; // Могут ли несколько одинаковых предметов данного типа стакаться
     // Вот это поле показывать если stacked == true;
     public int stackedMax;
+
+    [HideInInspector]
     public int stackedNow;
+
+    public float weight;
 
     public abstract void GetInfo();
 

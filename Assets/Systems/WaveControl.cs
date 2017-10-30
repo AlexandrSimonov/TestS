@@ -75,7 +75,7 @@ public class WaveControl : MonoBehaviour {
 
     private void OnEnd() {
         DialogSystem.AddMessage("Конец волны", 4);
-        MagicDust.AddMoney(100);
+        MagicDust.Plus(100);
         strongWave += 5;
     }
 }

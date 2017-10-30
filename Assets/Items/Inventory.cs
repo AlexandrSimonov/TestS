@@ -11,8 +11,8 @@ public class Inventory : MonoBehaviour {
     public ItemInInventory itemSectionPrefab;
     public GameObject inventoryParent;
 
-    public int currentCountItem;
-    public float currentWeight;
+    public int currentCountItem = 0;
+    public float currentWeight = 0;
 
     // Read only
     public ItemInInventory selectedItem;
@@ -39,6 +39,36 @@ public class Inventory : MonoBehaviour {
         selectedItem = item;
 
         itemSelected.Invoke();
+    }
+
+    public void AddItem(Item item) {
+        if (IsCanTake(item)) {
+            Debug.Log("Item add");
+            foreach (ItemInInventory section in items) {
+                if (section.item == null) {
+                    currentWeight += item.weight;
+                    currentCountItem++;
+                    section.SetItem(item);
+                    break;
+                }
+            }
+        }
+    }
+
+    public bool IsCanTake(Item item) {
+        if (currentWeight + item.weight > maxWeight) {
+            DialogSystem.AddMessage("Слишком большой вес", 2);
+            return false;
+        }
+
+        if (currentCountItem + 1 > maxCountItem) {
+            DialogSystem.AddMessage("Недостаточно места в сумке", 2);
+            return false;
+        }
+
+        
+
+        return true;
     }
 
     public void GetItemName() {

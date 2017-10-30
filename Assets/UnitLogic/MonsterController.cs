@@ -56,7 +56,7 @@ public class MonsterController : MonoBehaviour {
     }
 
     public void OnHpDie() {
-        MagicDust.AddMoney(10);
+        MagicDust.Plus(10);
         WaveControl.MonsterDie();
 
         // Проиграть анимацию смерти и т.д, то есть сам объект не удаляется, а просто отметить, что он мертв

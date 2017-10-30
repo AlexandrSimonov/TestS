@@ -5,7 +5,7 @@ using System.Collections;
 public class ItemInInventory : MonoBehaviour {
 
     public Item item;
-    public float count;
+    public int count;
 
     private Inventory inventory;
 
@@ -21,7 +21,7 @@ public class ItemInInventory : MonoBehaviour {
     public void Init(Inventory invent) {
         inventory = invent;
 
-        SetItem();
+        SetItem(null);
     }
 
     void Start() {
@@ -55,8 +55,10 @@ public class ItemInInventory : MonoBehaviour {
         activityPanel.SetActive(false);
     }
 
-    public void SetItem() {
-        if (item != null && item.sprite != null) {
+    public void SetItem(Item item) {
+        if (item != null && this.item == null) {
+            this.item = item;
+
             imageField.texture = item.sprite;
             //
             countField.text = "" + count;

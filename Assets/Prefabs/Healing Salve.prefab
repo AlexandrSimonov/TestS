@@ -53,3 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Healing Salve
   sprite: {fileID: 2800000, guid: e871f2d4467fc75449554252bd75fae2, type: 3}
+  stacked: 0
+  stackedMax: 0
+  stackedNow: 0
+  weight: 4
