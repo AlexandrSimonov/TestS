@@ -13,7 +13,7 @@ public class ItemInInventory : MonoBehaviour {
     public Text countField;
     public Text nameField;
     public Image background;
-    public GameObject activityPanel;
+    public ItemInGrid itemInGrid;// ПОдумать
     public GameObject countPanel;
 
     public Color selectedColor;
@@ -22,15 +22,11 @@ public class ItemInInventory : MonoBehaviour {
     public void Init(Inventory inventory, Item item) {
         this.inventory = inventory;
         this.item = item;
-        // Условия подописовать
+
         CountChange(1);
 
         imageField.texture = item.sprite;
         nameField.text = item.itemName;
-    }
-
-    void Start() {
-        GetComponent<Button>().onClick.AddListener(Select);
     }
 
     public void Activate() {
@@ -43,10 +39,15 @@ public class ItemInInventory : MonoBehaviour {
         //Если оружие или что-то такое, то просто помечать как активное
     }
 
-    public void Throw() {
-        Debug.Log("Объект выброшен" + item.itemName);
 
-        // Спрашивать сколько выбросить один все или может часть, показывать ползунок во время вырасывания
+    // Вызывается из панель
+    public void ThrowObject(int count) {
+        Debug.Log("Выбросить " + count + " предметов");
+    }
+    
+    //Запускает ряд событий для выбрасывания
+    public void Throw() {
+        inventory.throwPanel.Open(this);
     }
 
     public void CountChange(int i) {
@@ -69,12 +70,13 @@ public class ItemInInventory : MonoBehaviour {
     public void Select() {
         inventory.ItemSelect(this);
         background.color = selectedColor;
-        activityPanel.SetActive(true);
+        
     }
 
     public void Close() {
         background.color = notSelectedColor;
-        activityPanel.SetActive(false);
+        itemInGrid.CloseActivityPanel();
+        inventory.throwPanel.Close();
     }
 
 }

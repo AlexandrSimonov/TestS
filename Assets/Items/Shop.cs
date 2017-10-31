@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class Shop : MonoBehaviour {
+public class Shop : WindowMonoBehaviour {
 
     public List<ItemShopStructure> items;
 

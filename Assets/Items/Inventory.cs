@@ -3,13 +3,15 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using System.Collections.Generic;
 
-public class Inventory : MonoBehaviour {
+public class Inventory : WindowMonoBehaviour {
 
     public int maxCountItem;
     public float maxWeight;
 
     public ItemInInventory itemSectionPrefab;
+
     public GameObject inventoryParent;
+    public ThrowPanel throwPanel;
 
     public int currentCountItem = 0;
     public float currentWeight = 0;
@@ -22,10 +24,6 @@ public class Inventory : MonoBehaviour {
     private List<ItemInInventory> items = new List<ItemInInventory>();
 
 
-    void Start() {
-        
-    }
-
     public void ItemSelect(ItemInInventory item) {
         if (selectedItem != null) {
             selectedItem.Close();
@@ -36,7 +34,6 @@ public class Inventory : MonoBehaviour {
         itemSelected.Invoke();
     }
 
-    // Подумать, что если добавляется несколько объектов, то есть застаканных
     public void AddItem(Item item) {
         if (IsCanTake(item)) {
             Debug.Log("Item add");

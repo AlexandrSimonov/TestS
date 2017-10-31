@@ -1,16 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class Item : MonoBehaviour, IItem {
-
+public abstract class Item : MonoBehaviour, IItem, ICatchItem {
+    
     public string itemName;
     public Texture sprite;
+    public GameObject model;
+
     public bool stacked; // Могут ли несколько одинаковых предметов данного типа стакаться
     // Вот это поле показывать если stacked == true;
     public int stackedMax;
-
-    [HideInInspector]
-    public int stackedNow;
 
     public float weight;
 
@@ -20,6 +19,10 @@ public abstract class Item : MonoBehaviour, IItem {
     }
 
     public ItemType type;
+
+    public void Catch(Inventory inventory) {
+        inventory.AddItem(this);
+    }
 
     public abstract void GetInfo();
 
