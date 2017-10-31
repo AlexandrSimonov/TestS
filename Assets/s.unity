@@ -2343,7 +2343,7 @@ MonoBehaviour:
   items:
   - item: {fileID: 114462735152786066, guid: 02d8295b4d8c05e4882ca0436fd8d4f5, type: 2}
     count: 5
-    cost: 100
+    cost: 10
   - item: {fileID: 114462735152786066, guid: 02d8295b4d8c05e4882ca0436fd8d4f5, type: 2}
     count: 100
     cost: 2

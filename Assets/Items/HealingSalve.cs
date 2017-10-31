@@ -3,8 +3,8 @@ using UnityEditor;
 
 public class HealingSalve : Item {
 
-    public override void Activate(GameObject target) {
-        Debug.Log(target.name + " лечится");
+    public override void Activate() {
+        Debug.Log(gameObject.name + " лечится");
     }
 
     public override void DeActivate() {}

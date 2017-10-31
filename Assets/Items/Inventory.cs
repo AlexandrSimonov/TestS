@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
-using System.Collections;
+using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour {
 
@@ -19,16 +19,11 @@ public class Inventory : MonoBehaviour {
 
     public UnityEvent itemSelected;
 
-    private ItemInInventory[] items;
+    private List<ItemInInventory> items = new List<ItemInInventory>();
 
 
     void Start() {
-        items = new ItemInInventory[maxCountItem];
-
-        for (int i = 0; i < maxCountItem; i++) {
-            items[i] = Instantiate(itemSectionPrefab.gameObject, inventoryParent.transform).GetComponent<ItemInInventory>();
-            items[i].Init(this);
-        }
+        
     }
 
     public void ItemSelect(ItemInInventory item) {
@@ -41,17 +36,29 @@ public class Inventory : MonoBehaviour {
         itemSelected.Invoke();
     }
 
+    // Подумать, что если добавляется несколько объектов, то есть застаканных
     public void AddItem(Item item) {
         if (IsCanTake(item)) {
             Debug.Log("Item add");
-            foreach (ItemInInventory section in items) {
-                if (section.item == null) {
-                    currentWeight += item.weight;
-                    currentCountItem++;
-                    section.SetItem(item);
-                    break;
-                }
+
+            if (item.stacked) {
+
+                //Ищем ему пару, если пара найдена и всё ок добавляем к паре
+
+                foreach (ItemInInventory inventoryItem in items) {
+                    Debug.Log(item == inventoryItem.item);
+                    if (item == inventoryItem.item && inventoryItem.count + 1 <= item.stackedMax) {
+                        inventoryItem.CountChange(1);
+                        return;
+                    }
+                }                
             }
+
+            
+            ItemInInventory tmpItem = Instantiate(itemSectionPrefab.gameObject, inventoryParent.transform).GetComponent<ItemInInventory>();
+            items.Add(tmpItem);
+            tmpItem.Init(this, item);
+            
         }
     }
 

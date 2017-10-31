@@ -29,9 +29,32 @@ public class ItemInShop : MonoBehaviour {
         if (shop.inventory != null) {
             if (structure.count > 0 && MagicDust.IsCanBuy(structure.cost) && shop.inventory.IsCanTake(structure.item)) {
                 MagicDust.Minus(structure.cost);
-                structure.count--;
+
+                ChangeCount(-1);
+
                 shop.inventory.AddItem(structure.item);
+                
             }
         }
+    }
+
+    private void ChangeCount(int count) {
+        structure.count += count;
+
+        countField.text = "" + structure.count;
+
+        if (structure.count == 0) {
+            Hide();
+        } else {
+            Show();
+        }
+    }
+
+    public void Hide() {
+        this.gameObject.SetActive(false);
+    }
+
+    public void Show() {
+        this.gameObject.SetActive(true);
     }
 }
