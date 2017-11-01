@@ -9,25 +9,31 @@ public class ThrowPanel : MonoBehaviour{
     private ItemInInventory item;
     private int value;
 
-    void Start() {
+    private static ThrowPanel instance;
+
+    private void Awake() {
         slider.onValueChanged.AddListener(delegate { ValueChanged(); });
+
+        instance = this;
+
+        gameObject.SetActive(false);
     }
 
-    public void Open(ItemInInventory item) {
-        slider.maxValue = item.count;
-        value = 1;
+    public static void Open(ItemInInventory item) {
+        instance.slider.maxValue = item.count;
+        instance.value = 1;
 
         if (item.item.stacked) {
-            slider.gameObject.SetActive(true);
-            countText.gameObject.SetActive(true);    
+            instance.slider.gameObject.SetActive(true);
+            instance.countText.gameObject.SetActive(true);    
         } else {
-            slider.gameObject.SetActive(false);
-            countText.gameObject.SetActive(false);
+            instance.slider.gameObject.SetActive(false);
+            instance.countText.gameObject.SetActive(false);
         }
 
-        this.item = item;
+        instance.item = item;
 
-        gameObject.SetActive(true);
+        instance.gameObject.SetActive(true);
     }
 
     private void Update() {
@@ -39,8 +45,8 @@ public class ThrowPanel : MonoBehaviour{
         value = (int)slider.value;
     }
 
-    public void Close() {
-        gameObject.SetActive(false);
+    public static void Close() {
+        instance.gameObject.SetActive(false);
     }
 
     public void Okay() {

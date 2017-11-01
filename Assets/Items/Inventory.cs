@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using System.Collections.Generic;
 
-public class Inventory : WindowMonoBehaviour {
+public class Inventory : MonoBehaviour {
 
     public int maxCountItem;
     public float maxWeight;
@@ -16,26 +16,9 @@ public class Inventory : WindowMonoBehaviour {
     private int currentCountItem = 0;
     private float currentWeight = 0;
 
-    // Read only
-    [HideInInspector]
-    public ItemInInventory selectedItem;
-    [HideInInspector]
-    public UnityEvent itemSelected;
-
     public GameObject Player;
 
     private List<ItemInInventory> items = new List<ItemInInventory>();
-
-
-    public void ItemSelect(ItemInInventory item) {
-        if (selectedItem != null) {
-            selectedItem.Close();
-        }     
-   
-        selectedItem = item;
-
-        itemSelected.Invoke();
-    }
 
     public void AddItem(Item item) {
         if (IsCanTake(item)) {
@@ -78,9 +61,4 @@ public class Inventory : WindowMonoBehaviour {
         return true;
     }
 
-    public void GetItemName() {
-        if (selectedItem != null) {
-            Debug.Log(selectedItem.item.itemName);
-        }
-    }
 }

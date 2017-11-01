@@ -2,31 +2,18 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class ItemInInventory : MonoBehaviour {
+// Вот эту штуку нужно пределать, чтобы можно было сразу несколько вещей покупать
+public class ItemInInventory : ItemInGrid {
 
-    public Item item;
     public int count;
-
-    private Inventory inventory;
-
-    public RawImage imageField;
-    public Text countField;
-    public Text nameField;
-    public Image background;
-    public ItemInGrid itemInGrid;// ПОдумать
-    public GameObject countPanel;
-
-    public Color selectedColor;
-    public Color notSelectedColor;
+    /*public Text countField;
+    public GameObject countPanel;*/
 
     public void Init(Inventory inventory, Item item) {
-        this.inventory = inventory;
+        base.Init(item);
+
         this.item = item;
-
         CountChange(1);
-
-        imageField.texture = item.sprite;
-        nameField.text = item.itemName;
     }
 
     public void Activate() {
@@ -39,16 +26,15 @@ public class ItemInInventory : MonoBehaviour {
         //Если оружие или что-то такое, то просто помечать как активное
     }
 
-
     // Вызывается из панель
     public void ThrowObject(int count) {
         Debug.Log("Выбросить " + count + " предметов");
         // Вот тут вот создать объект кинуть его на сцену, придать толчек, все дела
+        //Нужно инвентарю сообщить что объект выброшен
     }
     
-    //Запускает ряд событий для выбрасывания
     public void Throw() {
-        inventory.throwPanel.Open(this);
+        ThrowPanel.Open(this);
     }
 
     public void CountChange(int i) {
@@ -58,26 +44,30 @@ public class ItemInInventory : MonoBehaviour {
             Destroy(this.gameObject);
             return;
         } 
-
-        countField.text = "" + count;
-
-        if (count == 1) {
-            countPanel.SetActive(false);
-        } else {
-            countPanel.SetActive(true);
-        }
+    }
+    
+    public void Sell() {
+        Debug.Log("Продать предмет");
     }
 
-    public void Select() {
-        inventory.ItemSelect(this);
-        background.color = selectedColor;
-        
+    public override string GenerateDescription() {
+        return "Этот предмет в инвентаре";
     }
 
-    public void Close() {
-        background.color = notSelectedColor;
-        itemInGrid.CloseActivityPanel();
-        inventory.throwPanel.Close();
+    public override ActivityButton[] GenerateActivityButton() {
+        return new ActivityButton[] {
+            new ActivityButton {
+                btnEvent = Sell,
+                btnName = "Sell"
+            },
+            new ActivityButton {
+                btnEvent = Throw,
+                btnName = "Throw"
+            },
+            new ActivityButton {
+                btnEvent = Activate,
+                btnName = "Activate"
+            }
+        };
     }
-
 }
