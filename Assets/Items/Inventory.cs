@@ -13,13 +13,16 @@ public class Inventory : WindowMonoBehaviour {
     public GameObject inventoryParent;
     public ThrowPanel throwPanel;
 
-    public int currentCountItem = 0;
-    public float currentWeight = 0;
+    private int currentCountItem = 0;
+    private float currentWeight = 0;
 
     // Read only
+    [HideInInspector]
     public ItemInInventory selectedItem;
-
+    [HideInInspector]
     public UnityEvent itemSelected;
+
+    public GameObject Player;
 
     private List<ItemInInventory> items = new List<ItemInInventory>();
 
@@ -55,7 +58,7 @@ public class Inventory : WindowMonoBehaviour {
             ItemInInventory tmpItem = Instantiate(itemSectionPrefab.gameObject, inventoryParent.transform).GetComponent<ItemInInventory>();
             items.Add(tmpItem);
             tmpItem.Init(this, item);
-            
+            tmpItem.item.Init(Player);
         }
     }
 

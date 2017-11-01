@@ -5,13 +5,17 @@ using UnityEngine.Events;
 
 public class Hp : MonoBehaviour {
 
-    public float hp = 0;
-
     [HideInInspector]
+    public float hp = 0;
+    public float maxHp = 0;
+
     public HpChangeEvent OnHpChangeEvent;
 
     public UnityEvent OnHpDieEvent;
 
+    private void Start() {
+        hp = maxHp;
+    }
 
     public void Plus(float count) {
         Change(count);   
@@ -23,10 +27,15 @@ public class Hp : MonoBehaviour {
 
     private void Change(float count) {
         hp += count;
+
         OnHpChangeEvent.Invoke(hp);
+
         if (hp <= 0) {
             OnHpDieEvent.Invoke();
-            this.gameObject.SetActive(false);
+        }
+
+        if (hp > maxHp) {
+            hp = maxHp;
         }
     }
 

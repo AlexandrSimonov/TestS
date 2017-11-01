@@ -6,22 +6,32 @@ using System.Reflection;
 public abstract class Effect : MonoBehaviour, IEffect, IEffectActivate {
 
     public float duration;
+
     protected float TimeEnd;
+    protected EffectActivate effectActivate;
     protected GameObject target;
 
+    // Вызывается из вне
     public void InitEffect(EffectActivate target) {
-        TimeEnd = Time.time + duration;
+        effectActivate = target;
         this.target = target.gameObject;
+
+        TimeEnd = Time.time + duration;
 
         if (this.target == null) {
             throw new Exception("EffectActivate is not gameObject");
         }
-        
-        target.Init(GetCopyEffect());
+
+        IEffectActivate effect = GetCopyEffect();
+        effectActivate.Init(effect);
+        effect.OnInitEffect();
+
     }
 
+    // Переопрделяется в реализаторе абстрактного класса и вызывается в EventLoop
     public abstract void EffectUpdate();
 
+    // Вызывается из EffectActivate
     public bool EffectLoop() {
         if (TimeEnd <= Time.time) {
             return true;
@@ -32,11 +42,21 @@ public abstract class Effect : MonoBehaviour, IEffect, IEffectActivate {
         return false;
     }
 
+    // Переопределяется в реализаторе абстрактного класса и вызывается в InitEffect
     public abstract void OnInitEffect();
 
+    public virtual void OnBeforeBreakEffect() { }
+
+    // Вызывается для преривания эффекта как из вне так и внутри
+    public void BreakEffect() {
+        OnBeforeBreakEffect();
+
+        effectActivate.RemoveEffect(this);
+    }
+
+    // Вызывается из InitEffect для создания коппи текущего объекта
     public IEffectActivate GetCopyEffect() {
         IEffectActivate effect = this.MemberwiseClone() as IEffectActivate;
-        effect.OnInitEffect();
 
         return effect;
     }

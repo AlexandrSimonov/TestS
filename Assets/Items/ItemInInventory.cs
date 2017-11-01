@@ -43,6 +43,7 @@ public class ItemInInventory : MonoBehaviour {
     // Вызывается из панель
     public void ThrowObject(int count) {
         Debug.Log("Выбросить " + count + " предметов");
+        // Вот тут вот создать объект кинуть его на сцену, придать толчек, все дела
     }
     
     //Запускает ряд событий для выбрасывания

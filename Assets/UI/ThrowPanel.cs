@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class ThrowPanel : MonoBehaviour{
 
-    public UserSlider slider;
+    public Slider slider;
     public Text countText;
 
     private ItemInInventory item;

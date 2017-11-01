@@ -13,6 +13,12 @@ public abstract class Item : MonoBehaviour, IItem, ICatchItem {
 
     public float weight;
 
+    public GameObject Player;
+
+    public void Init(GameObject player) {
+        this.Player = player;
+    }
+
     public enum ItemType {
         Consumbles,
         Weapons

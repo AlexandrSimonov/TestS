@@ -8,6 +8,9 @@ public class FireEffect : Effect {
 
     public override void OnInitEffect() {
         hp = target.GetComponent<Hp>();
+        if (hp == null) {
+            BreakEffect();
+        }
     }
 
     public override void EffectUpdate() {

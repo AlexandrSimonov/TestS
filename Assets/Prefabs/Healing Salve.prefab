@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4875594039958254}
   - component: {fileID: 114462735152786066}
+  - component: {fileID: 114263243324655854}
   m_Layer: 0
   m_Name: Healing Salve
   m_TagString: Untagged
@@ -40,6 +41,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114263243324655854
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1583050619345566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1166993d7bd393498c621e6c0bfa202, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 10
+  regen: 1
 --- !u!114 &114462735152786066
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -48,13 +62,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1583050619345566}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28cd91ce174af054eb3c91e697020938, type: 3}
+  m_Script: {fileID: 11500000, guid: 6278967ca0ea83b4aab8f661b59e8264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Healing Salve
   sprite: {fileID: 2800000, guid: 98d6616336505d9409f213b5fa8b1d2b, type: 3}
   model: {fileID: 0}
-  stacked: 0
+  stacked: 1
   stackedMax: 10
   weight: 4
+  Player: {fileID: 0}
   type: 0
