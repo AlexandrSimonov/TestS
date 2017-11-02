@@ -5,7 +5,7 @@ public class Shop : MonoBehaviour {
 
     public List<ItemShopStructure> items;
 
-    public Transform parentShop;
+    public ItemContext itemContext;
     public ItemInShop itemInShopPrefab;
 
     public Inventory inventory;
@@ -22,7 +22,7 @@ public class Shop : MonoBehaviour {
     }
 
     private void InitItemInShop(ItemShopStructure structure) {
-        Instantiate(itemInShopPrefab.gameObject, parentShop).GetComponent<ItemInShop>().Init(structure, this);
+        Instantiate(itemInShopPrefab.gameObject, itemContext.parentForObject).GetComponent<ItemInShop>().Init(structure, itemContext, this);
     }
 
 }

@@ -14,24 +14,26 @@ public abstract class ItemInGrid : MonoBehaviour {
     public RawImage imageField;
     public Text textField;
 
+    public ItemContext context;
 
 
-    public virtual void Init(Item item) {
+    public virtual void Init(Item item, ItemContext context) {
         imageField.texture = item.sprite;
         textField.text = item.itemName;
         this.item = item;
+        this.context = context;
     }
 
     public void Select() {
         Debug.Log("Выбран");
         background.color = selectedColor;
-        ItemDescription.Open(this);
+        context.itemDescription.Open(this);
     }
 
     public void Close() {
         Debug.Log("Выбор отменен");
         background.color = notSelectedColor;
-        ItemDescription.Close();
+        context.itemDescription.Close();
     }
 
     // Переопределяем в shop, чтобы добавить цену к описанию и в inventory, чтобы что-то тоже добавить

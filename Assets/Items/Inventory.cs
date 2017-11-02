@@ -10,8 +10,7 @@ public class Inventory : MonoBehaviour {
 
     public ItemInInventory itemSectionPrefab;
 
-    public GameObject inventoryParent;
-    public ThrowPanel throwPanel;
+    public ItemContext itemContext;
 
     private int currentCountItem = 0;
     private float currentWeight = 0;
@@ -38,9 +37,9 @@ public class Inventory : MonoBehaviour {
             }
 
             
-            ItemInInventory tmpItem = Instantiate(itemSectionPrefab.gameObject, inventoryParent.transform).GetComponent<ItemInInventory>();
+            ItemInInventory tmpItem = Instantiate(itemSectionPrefab.gameObject, itemContext.parentForObject).GetComponent<ItemInInventory>();
             items.Add(tmpItem);
-            tmpItem.Init(this, item);
+            tmpItem.Init(item, itemContext, this);
             tmpItem.item.Init(Player);
         }
     }

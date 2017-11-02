@@ -6,14 +6,13 @@ using System.Collections;
 public class ItemInInventory : ItemInGrid {
 
     public int count;
-    /*public Text countField;
-    public GameObject countPanel;*/
+    public Inventory inventory;
 
-    public void Init(Inventory inventory, Item item) {
-        base.Init(item);
+    public void Init(Item item, ItemContext context, Inventory inventory) {
+        base.Init(item, context);
 
-        this.item = item;
-        CountChange(1);
+        this.inventory = inventory;
+
     }
 
     public void Activate() {
@@ -34,7 +33,7 @@ public class ItemInInventory : ItemInGrid {
     }
     
     public void Throw() {
-        ThrowPanel.Open(this);
+        context.throwPanel.Open(this);
     }
 
     public void CountChange(int i) {

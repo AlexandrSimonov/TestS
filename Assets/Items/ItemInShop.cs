@@ -12,8 +12,8 @@ public class ItemInShop : ItemInGrid {
     /*public Text costField;
     public Text countField;*/
 
-    public void Init(ItemShopStructure structure, Shop shop) {
-        base.Init(structure.item);
+    public void Init(ItemShopStructure structure, ItemContext context, Shop shop) {
+        base.Init(structure.item, context);
 
         this.structure = structure;
         this.shop = shop;
