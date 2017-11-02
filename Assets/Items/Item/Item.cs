@@ -15,7 +15,7 @@ public abstract class Item : MonoBehaviour, IItem, ICatchItem {
 
     public GameObject Player;
 
-    public void Init(GameObject player) {
+    public void SetPlayer(GameObject player) {
         this.Player = player;
     }
 
@@ -27,7 +27,7 @@ public abstract class Item : MonoBehaviour, IItem, ICatchItem {
     public ItemType type;
 
     public void Catch(Inventory inventory) {
-        inventory.AddItem(this);
+       // inventory.AddItem(this);
     }
 
     public abstract void GetInfo();

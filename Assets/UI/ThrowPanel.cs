@@ -44,7 +44,7 @@ public class ThrowPanel : MonoBehaviour{
     }
 
     public void Okay() {
-        item.ThrowObject((int)this.slider.value);
+        //item.ThrowObject((int)this.slider.value);
         Close();
     }
 }
