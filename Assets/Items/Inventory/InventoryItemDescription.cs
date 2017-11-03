@@ -15,11 +15,14 @@ public class InventoryItemDescription : MonoBehaviour {
     public void Awake() {
         window.SelectEvent.AddListener(Open);
         window.CloseEvent.AddListener(Close);
+
         gameObject.SetActive(false);
     }
 
     public void Open() {
         gameObject.SetActive(true);
+
+        Render();
     }
 
     public void Close() {
@@ -28,12 +31,14 @@ public class InventoryItemDescription : MonoBehaviour {
         }
     }
 
-    public void Update() {
-        nameField.text = window.selected.itemName;
-        imageField.texture = window.selected.sprite;
-    }
+    public void Render() {
+        if (window.selected != null) {
+            nameField.text = window.selected.itemName;
+            imageField.texture = window.selected.sprite;
 
-    public void Activate() {
-        window.ActivateSelected();
+            window.selected.ChangeEvent.AddListener(Render);
+        } else {
+            Close();
+        }
     }
 }

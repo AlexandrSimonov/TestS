@@ -8,9 +8,9 @@ public class ItemInInventroryWindow : ItemInGrid {
     public Text itemName;
     public RawImage itemImage;
 
-    void Update() {
+    // Вызывается когда предмет изменился и нужен "ререндер"
+    public override void Render() {
         itemImage.texture = item.sprite;
         itemName.text = item.itemName;
-
     }
 }

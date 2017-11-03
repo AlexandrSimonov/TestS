@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
-using UnityEditor;
 
 public class Shell : MonoBehaviour {
 

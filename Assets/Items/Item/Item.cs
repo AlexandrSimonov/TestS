@@ -32,20 +32,23 @@ public abstract class Item : MonoBehaviour, IItem, ICatchItem {
 
     public void SetItemName(string name) {
         itemName = name;
-        ChangeEvent.Invoke();
     }
 
     public void Change() {
-        ChangeEvent.Invoke();
         Debug.Log("Изменение debug");
     }
 
     public void CastSpell() {
         SetItemName(itemName + "(заколдованное)");
+        ChangeEvent.Invoke();
     }
 
     public Item GetCopy() {
         return MemberwiseClone() as Item;
+    }
+
+    public void RemoveListners() {
+        ChangeEvent.RemoveAllListeners();
     }
 
     public abstract void GetInfo();

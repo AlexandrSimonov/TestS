@@ -20,8 +20,29 @@ public class InventoryWindow : ItemWindow {
 
     private void Start() {
         for (int i = 0; i < inventory.items.Count; i++) {
-            Instantiate(prefabObj.gameObject, parentForObject).GetComponent<ItemInGrid>().Init(inventory.items[i], i, SetSelectedItem, CloseSelect);
+            Instantiate(prefabObj.gameObject, parentForObject)
+            .GetComponent<ItemInGrid>()
+            .Init(inventory.items[i], i, SetSelectedItem, CloseSelect, Activate);
         }
+
+        inventory.addItemEvent.AddListener(InventoryAddItem);
+        inventory.removeItemEvent.AddListener(InventoryRemoveItem);
+    }
+
+    public void InventoryRemoveItem(Item item) {
+        foreach (Transform go in parentForObject) {
+            if (go.GetComponent<ItemInGrid>().item == item) {
+                Destroy(go.gameObject);
+                break;
+            }
+        }
+    }
+
+    // С номерами объектов будет косяк!!! Нужно подрпавить
+    public void InventoryAddItem(Item item) {
+        Instantiate(prefabObj.gameObject, parentForObject)
+            .GetComponent<ItemInGrid>()
+            .Init(item, inventory.num, SetSelectedItem, CloseSelect, Activate);
     }
 
     public void SetSelectedItem(int i) {
@@ -33,25 +54,42 @@ public class InventoryWindow : ItemWindow {
         CloseEvent.Invoke();
     }
 
-    public void ActivateSelected() {
-        //ActivateItem(selected);
-    }
 
-    public void CastSpellSelected() {
-        CastSpell(selected);
+    public void ActivateSelected() {
+        ActivateItem(selected);
     }
 
     public void Activate(int num) {
-        //ActivateItem(inventory.GetItems()[num]);
+        ActivateItem(inventory.items[num]);
     }
 
     private void ActivateItem(Item item) {
         item.Activate();
     }
+    
+    //Если предмет дейтсвительно нужно выбросить
+    public void ThrowOk() {
+        Debug.Log("Предмет выброшен " + selected.itemName);
+        inventory.RemoveItem(selected);
+        selected = null;
+        SelectEvent.Invoke();
+    }
+    // Вызывается событием 
+    public void ThrowSelected() {
+        WindowConfirm.Open("Выбрасывание предмета", "Вы уверенны, что хотите выбросить предмет " + selected.itemName + "?", ThrowOk, null);
+    }
 
-    public void Throw() { }
+    // Колдование, вызывается событием 
+    public void CastSpellSelected() {
+        CastSpell(selected);
+    }
 
-    public void CastSpell(Item item) {
+    // Вызывается для заколдования предмета
+    private void CastSpell(Item item) {
         item.CastSpell();
     }
+
+
+    
+
 }

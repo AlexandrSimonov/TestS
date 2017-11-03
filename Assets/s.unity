@@ -1077,8 +1077,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1837538482}
-        m_MethodName: Activate
+      - m_Target: {fileID: 510568738}
+        m_MethodName: ActivateSelected
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2852,7 +2852,7 @@ Prefab:
     - target: {fileID: 224657568463091618, guid: 1ca4f3f562daa2446a1535086301e196,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 224909763740094572, guid: 1ca4f3f562daa2446a1535086301e196,
         type: 2}
@@ -2954,7 +2954,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 510568738}
-        m_MethodName: Throw
+        m_MethodName: ThrowSelected
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3475,10 +3475,10 @@ MonoBehaviour:
   - {fileID: 114462735152786066, guid: 02d8295b4d8c05e4882ca0436fd8d4f5, type: 2}
   - {fileID: 114738246040724994, guid: 9645a14d1cc7bce418e92d6fb19dab67, type: 2}
   items: []
-  AddItemEvent:
+  addItemEvent:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: Inventory+AddItemEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
 --- !u!114 &1045155246
 MonoBehaviour:
