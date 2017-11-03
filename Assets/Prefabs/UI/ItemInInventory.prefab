@@ -39,8 +39,8 @@ GameObject:
   - component: {fileID: 222882578826659330}
   - component: {fileID: 114694895393249904}
   - component: {fileID: 114635298821146286}
-  - component: {fileID: 114415658114890718}
-  - component: {fileID: 114391585981223196}
+  - component: {fileID: 114141593462007738}
+  - component: {fileID: 114392471078159920}
   m_Layer: 5
   m_Name: ItemInInventory
   m_TagString: Untagged
@@ -65,7 +65,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114391585981223196
+--- !u!114 &114141593462007738
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -81,7 +81,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 114415658114890718}
+        - m_Target: {fileID: 114392471078159920}
           m_MethodName: Select
           m_Mode: 1
           m_Arguments:
@@ -98,8 +98,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 114415658114890718}
-          m_MethodName: Close
+        - m_Target: {fileID: 114392471078159920}
+          m_MethodName: DeSelect
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -112,7 +112,7 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
---- !u!114 &114415658114890718
+--- !u!114 &114392471078159920
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -120,16 +120,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1495361678058164}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9126337ff8e98c04cade28e66089e0f5, type: 3}
+  m_Script: {fileID: 11500000, guid: c0059e2157c7aab4e8adb5d72ea929c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
-  selectedColor: {r: 0.45490196, g: 0.06666667, b: 0.06666667, a: 1}
-  notSelectedColor: {r: 1, g: 1, b: 1, a: 0.5019608}
-  background: {fileID: 114694895393249904}
-  imageField: {fileID: 114699766490958448}
-  textField: {fileID: 114681497277066608}
-  count: 0
+  itemName: {fileID: 114681497277066608}
+  itemImage: {fileID: 114699766490958448}
 --- !u!114 &114635298821146286
 MonoBehaviour:
   m_ObjectHideFlags: 1

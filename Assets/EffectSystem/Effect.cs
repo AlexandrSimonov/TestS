@@ -56,8 +56,6 @@ public abstract class Effect : MonoBehaviour, IEffect, IEffectActivate {
 
     // Вызывается из InitEffect для создания коппи текущего объекта
     public IEffectActivate GetCopyEffect() {
-        IEffectActivate effect = this.MemberwiseClone() as IEffectActivate;
-
-        return effect;
+        return this.MemberwiseClone() as IEffectActivate;
     }
 }

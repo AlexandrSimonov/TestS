@@ -55,10 +55,13 @@ MonoBehaviour:
   itemName: Healing Salve 2
   sprite: {fileID: 2800000, guid: 98d6616336505d9409f213b5fa8b1d2b, type: 3}
   model: {fileID: 0}
-  stacked: 1
-  stackedMax: 10
+  ChangeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   weight: 4
-  Player: {fileID: 0}
+  Owner: {fileID: 0}
   type: 0
 --- !u!114 &114926223188452844
 MonoBehaviour:

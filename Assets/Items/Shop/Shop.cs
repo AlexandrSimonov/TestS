@@ -4,9 +4,8 @@ using UnityEngine.Events;
 
 public class Shop : MonoBehaviour {
 
-    public List<ItemShopStructure> items;
-
-    public ItemContext itemContext;
+    public List<ItemInShop> items;
+   
     public ItemInShop itemInShopPrefab;
 
     public Inventory inventory;
@@ -16,14 +15,14 @@ public class Shop : MonoBehaviour {
     public UnityEvent ShopChange;
 
     void Start() {
-        foreach (ItemShopStructure structure in items) {
+        foreach (ItemInShop structure in items) {
             InitItemInShop(structure);
         }
 
         ShopChange.Invoke();
     }
 
-    public void AddNewItem(ItemShopStructure structure) {
+    public void AddNewItem(ItemInShop structure) {
         items.Add(structure);
         InitItemInShop(structure);
 
@@ -35,7 +34,7 @@ public class Shop : MonoBehaviour {
         ShopChange.Invoke();
     } 
 
-    private void InitItemInShop(ItemShopStructure structure) {
+    private void InitItemInShop(ItemInShop structure) {
         //Instantiate(itemInShopPrefab.gameObject, itemContext.parentForObject).GetComponent<ItemInShop>().Init(structure, itemContext, this);
     }
 

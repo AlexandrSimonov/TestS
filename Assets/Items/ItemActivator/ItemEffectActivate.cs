@@ -7,7 +7,7 @@ public class ItemEffectActivate : Item {
         IEffect[] effects = GetComponents<IEffect>();
 
         foreach (IEffect effect in effects) {
-            effect.InitEffect(Player.GetComponent<EffectActivate>());
+            effect.InitEffect(Owner.GetComponent<EffectActivate>());
         }
     }
 

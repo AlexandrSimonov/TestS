@@ -4,5 +4,5 @@ public interface IItem {
 
     void GetInfo();
 
-    void SetPlayer(GameObject player);
+    void SetOwner(GameObject owner);
 }

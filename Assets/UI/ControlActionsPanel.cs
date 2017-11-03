@@ -22,7 +22,6 @@ public class ControlActionsPanel : MonoBehaviour {
             if (Input.GetMouseButtonDown(0)) {
                 HidePanel();
             }
-           
             button.SetActive(false);
         } else {
             button.SetActive(true);

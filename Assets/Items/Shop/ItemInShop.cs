@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
-using UnityEngine.Serialization;
 
-public class ItemInShop {
+[System.Serializable]
+public class ItemInShop{
 
-
-
+    public Item item;
+    public int count;
+    public int cost;
 }

@@ -1,25 +1,57 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.Events;
+using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class InventoryWindow : ItemWindow {
 
     public Transform parentForObject;
+
+    public ItemInGrid prefabObj;
+
     public Inventory inventory;
-    public GameObject prefabObj;
+    public Item selected;
 
-    // Вот в этих классах скрываем магию того как окна отображают свои элементы и т.д
-    // Вот в этих окнах выбираем префабы и настраиваем отображание как нужно
-    void Start() {
-        inventory.InventoryChange.AddListener(View); 
-    }
+    [HideInInspector]
+    public UnityEvent SelectEvent;
 
-    public void View() {
-        // Вот тут контролируется всё, чтобы было четенько и об]екты создавались нужные в нужном количестве
-        foreach (ItemInInventoryStructure obj in inventory.GetItems()) {
-            ItemInInventory itemInInventory = Instantiate(prefabObj, parentForObject).GetComponent<ItemInInventory>();
-            itemInInventory.Init(obj);
+    [HideInInspector]
+    public UnityEvent CloseEvent;
+
+    private void Start() {
+        for (int i = 0; i < inventory.items.Count; i++) {
+            Instantiate(prefabObj.gameObject, parentForObject).GetComponent<ItemInGrid>().Init(inventory.items[i], i, SetSelectedItem, CloseSelect);
         }
     }
 
+    public void SetSelectedItem(int i) {
+        selected = inventory.items[i];
+        SelectEvent.Invoke();
+    }
 
+    public void CloseSelect() {
+        CloseEvent.Invoke();
+    }
+
+    public void ActivateSelected() {
+        //ActivateItem(selected);
+    }
+
+    public void CastSpellSelected() {
+        CastSpell(selected);
+    }
+
+    public void Activate(int num) {
+        //ActivateItem(inventory.GetItems()[num]);
+    }
+
+    private void ActivateItem(Item item) {
+        item.Activate();
+    }
+
+    public void Throw() { }
+
+    public void CastSpell(Item item) {
+        item.CastSpell();
+    }
 }

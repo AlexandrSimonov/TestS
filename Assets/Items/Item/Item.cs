@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using System.Collections;
 
 public abstract class Item : MonoBehaviour, IItem, ICatchItem {
@@ -7,17 +8,12 @@ public abstract class Item : MonoBehaviour, IItem, ICatchItem {
     public Texture sprite;
     public GameObject model;
 
-    public bool stacked; // Могут ли несколько одинаковых предметов данного типа стакаться
-    // Вот это поле показывать если stacked == true;
-    public int stackedMax;
+    [HideInInspector]
+    public UnityEvent ChangeEvent;
 
     public float weight;
 
-    public GameObject Player;
-
-    public void SetPlayer(GameObject player) {
-        this.Player = player;
-    }
+    public GameObject Owner;
 
     public enum ItemType {
         Consumbles,
@@ -30,27 +26,32 @@ public abstract class Item : MonoBehaviour, IItem, ICatchItem {
        // inventory.AddItem(this);
     }
 
+    public void SetOwner(GameObject Owner) {
+        this.Owner = Owner;
+    }
+
+    public void SetItemName(string name) {
+        itemName = name;
+        ChangeEvent.Invoke();
+    }
+
+    public void Change() {
+        ChangeEvent.Invoke();
+        Debug.Log("Изменение debug");
+    }
+
+    public void CastSpell() {
+        SetItemName(itemName + "(заколдованное)");
+    }
+
+    public Item GetCopy() {
+        return MemberwiseClone() as Item;
+    }
+
     public abstract void GetInfo();
 
     public abstract void Activate();
 
     public abstract void DeActivate();
 
-    public static bool operator ==(Item item1, Item item2) {
-        return item1.itemName == item2.itemName;
-    }
-
-    public static bool operator !=(Item item1, Item item2) {
-        return item1.itemName != item2.itemName;
-    }
-
-    public override int GetHashCode() {
-        return base.GetHashCode();
-    }
-
-    public override bool Equals(object obj) {
-        var item = obj as Item;
-        return item != null &&
-               base.Equals(obj);
-    }
 }
