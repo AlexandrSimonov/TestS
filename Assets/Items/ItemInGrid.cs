@@ -4,27 +4,22 @@ using UnityEngine.UI;
 // Вот над этим подумать, если нужно будет менять что-то где-то ещё
 public abstract class ItemInGrid : MonoBehaviour {
 
-    protected int num;
+    protected int index;
     public Item item;
 
     protected UnityAction<int> select;
     protected UnityAction deselect;
     protected UnityAction<int> doubleTap;
 
-    public virtual void Init(Item item, int num, UnityAction<int> select, UnityAction deselect, UnityAction<int> doubleTap) {
-        this.item = item;
-        this.num = num;
+    public virtual void Init(int index, UnityAction<int> select, UnityAction deselect, UnityAction<int> doubleTap) {
+        this.index = index;
         this.select = select;
         this.deselect = deselect;
         this.doubleTap = doubleTap;
-
-        this.item.ChangeEvent.AddListener(Render); // Ввезде, где есть подписка, должна быть и отписка
-
-        Render();
     }
 
     public void Select() {
-        select.Invoke(num);
+        select.Invoke(index);
     }
 
     public void DeSelect() {
@@ -32,14 +27,20 @@ public abstract class ItemInGrid : MonoBehaviour {
     }
 
     public void DoubleTap() {
-        doubleTap.Invoke(num);
+        doubleTap.Invoke(index);
     }
-
-    public abstract void Render();
 
     public void Delete() {
-        this.item.ChangeEvent.RemoveListener(Render);
         Destroy(this.gameObject);
     }
+
+    public void Drag() {
+        Debug.Log("Drag");
+    }
+
+    public void Drop() {
+        Debug.Log("Drop");
+    }
+
 
 }

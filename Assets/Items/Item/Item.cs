@@ -8,9 +8,6 @@ public abstract class Item : MonoBehaviour, IItem, ICatchItem {
     public Texture sprite;
     public GameObject model;
 
-    [HideInInspector]
-    public UnityEvent ChangeEvent;
-
     public float weight;
 
     public GameObject Owner;
@@ -21,7 +18,7 @@ public abstract class Item : MonoBehaviour, IItem, ICatchItem {
     }
 
     public ItemType type;
-
+    /*Для айтемов нужно будет писать какую-то штуку для сравнения*/
     public void Catch(Inventory inventory) {
        // inventory.AddItem(this);
     }
@@ -40,16 +37,12 @@ public abstract class Item : MonoBehaviour, IItem, ICatchItem {
 
     public void CastSpell() {
         SetItemName(itemName + "(заколдованное)");
-        ChangeEvent.Invoke();
     }
 
     public Item GetCopy() {
         return MemberwiseClone() as Item;
     }
 
-    public void RemoveListners() {
-        ChangeEvent.RemoveAllListeners();
-    }
 
     public abstract void GetInfo();
 
@@ -57,4 +50,5 @@ public abstract class Item : MonoBehaviour, IItem, ICatchItem {
 
     public abstract void DeActivate();
 
+    
 }

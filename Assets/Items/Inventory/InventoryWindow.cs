@@ -7,56 +7,70 @@ public class InventoryWindow : ItemWindow {
 
     public Transform parentForObject;
 
-    public ItemInGrid prefabObj;
+    public ItemInInventroryWindow prefabObj;
 
     public Inventory inventory;
-    public Item selected;
+    public ItemInInventoryWindowGrid selected;
 
-    [HideInInspector]
-    public UnityEvent SelectEvent;
-
-    [HideInInspector]
-    public UnityEvent CloseEvent;
+    private List<ItemInInventoryWindowGrid> inventoryWindowItems;
 
     private void Start() {
-        for (int i = 0; i < inventory.items.Count; i++) {
-            Instantiate(prefabObj.gameObject, parentForObject)
-            .GetComponent<ItemInGrid>()
-            .Init(inventory.items[i], i, SetSelectedItem, CloseSelect, Activate);
+        inventoryWindowItems = new List<ItemInInventoryWindowGrid>();
+
+        // Иницилизируем список с индексами и пустыми ItemInInventoryWindowGrid, здесь же создаем префабы для отображения айтемов
+        for (int i = 0; i < inventory.maxCountItem; i++) {
+            inventoryWindowItems.Add(new ItemInInventoryWindowGrid {
+                item = null,
+                count = 0,
+                index = i
+            });
+
+            ItemInInventroryWindow obj = Instantiate(prefabObj, parentForObject);
+            obj.Init(inventoryWindowItems[i], this);
         }
 
+        // Добавляем в предметы, которые находяться в инвентаре
+        for (int i = 0; i < inventory.items.Count; i++) {
+            InventoryAddItem(inventory.items[i]);
+        }
+
+        // Слушатель на добавление новых предметов
         inventory.addItemEvent.AddListener(InventoryAddItem);
-        inventory.removeItemEvent.AddListener(InventoryRemoveItem);
+        //inventory.removeItemEvent.AddListener(InventoryRemoveItem);
     }
 
-    public void InventoryRemoveItem(Item item) {
+    /*public void InventoryRemoveItem(Item item) {
         foreach (Transform go in parentForObject) {
             if (go.GetComponent<ItemInGrid>().item == item) {
                 Destroy(go.gameObject);
                 break;
             }
         }
-    }
+    }*/
 
-    // С номерами объектов будет косяк!!! Нужно подрпавить
     public void InventoryAddItem(Item item) {
-        Instantiate(prefabObj.gameObject, parentForObject)
-            .GetComponent<ItemInGrid>()
-            .Init(item, inventory.num, SetSelectedItem, CloseSelect, Activate);
+        ItemInInventoryWindowGrid emptySection = null;
+
+        for (int i = 0; i < inventoryWindowItems.Count; i++) {
+            if (inventoryWindowItems[i].item == item && inventoryWindowItems[i].item != null) {
+                inventoryWindowItems[i].count++;
+                return;
+            }
+            if (inventoryWindowItems[i].item == null && inventoryWindowItems[i].count == 0 && emptySection == null) {
+                emptySection = inventoryWindowItems[i];  
+            }
+        }
+    
+        emptySection.item = item;
+        emptySection.count = 1;
     }
 
-    public void SetSelectedItem(int i) {
-        selected = inventory.items[i];
-        SelectEvent.Invoke();
+    public void SetSelectedItem(ItemInInventoryWindowGrid item) {
+        selected = item;
     }
-
-    public void CloseSelect() {
-        CloseEvent.Invoke();
-    }
-
 
     public void ActivateSelected() {
-        ActivateItem(selected);
+        //ActivateItem(selected);
     }
 
     public void Activate(int num) {
@@ -69,19 +83,18 @@ public class InventoryWindow : ItemWindow {
     
     //Если предмет дейтсвительно нужно выбросить
     public void ThrowOk() {
-        Debug.Log("Предмет выброшен " + selected.itemName);
-        inventory.RemoveItem(selected);
+        //Debug.Log("Предмет выброшен " + selected.itemName);
+        //inventory.RemoveItem(selected);
         selected = null;
-        SelectEvent.Invoke();
     }
     // Вызывается событием 
     public void ThrowSelected() {
-        WindowConfirm.Open("Выбрасывание предмета", "Вы уверенны, что хотите выбросить предмет " + selected.itemName + "?", ThrowOk, null);
+        //WindowConfirm.Open("Выбрасывание предмета", "Вы уверенны, что хотите выбросить предмет " + selected.itemName + "?", ThrowOk, null);
     }
 
     // Колдование, вызывается событием 
     public void CastSpellSelected() {
-        CastSpell(selected);
+        //CastSpell(selected);
     }
 
     // Вызывается для заколдования предмета
@@ -90,6 +103,12 @@ public class InventoryWindow : ItemWindow {
     }
 
 
-    
+    [System.Serializable]
+    public class ItemInInventoryWindowGrid {
+        public Item item;
 
+        public int count;
+
+        public int index;
+    } 
 }

@@ -17,11 +17,11 @@ public class Inventory : MonoBehaviour {
 
     public List<Item> items = new List<Item>();
 
-    public int num = 0;
     [HideInInspector]
     public AddItemEvent addItemEvent;
     [HideInInspector]
     public RemoveItemEvent removeItemEvent;
+
     void Awake() {
         foreach (Item item in itemInit) {
             AddItem(item.GetCopy());
@@ -32,7 +32,6 @@ public class Inventory : MonoBehaviour {
         if (IsCanTake(item)) {
             item.SetOwner(Owner);
             items.Add(item);
-            num++;
             addItemEvent.Invoke(item);
         }
 
@@ -40,7 +39,6 @@ public class Inventory : MonoBehaviour {
 
     public void RemoveItem(Item item) {
         item.SetOwner(null);
-        item.RemoveListners();
         removeItemEvent.Invoke(item);
         items.Remove(item);
     }
