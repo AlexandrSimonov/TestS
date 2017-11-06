@@ -126,6 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: {fileID: 114681497277066608}
   itemImage: {fileID: 114699766490958448}
+  emptyTexture: {fileID: 10916, guid: 0000000000000000f000000000000000, type: 0}
   count: 0
   window: {fileID: 0}
   item:
@@ -164,7 +165,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435"
+  m_Text: 
 --- !u!114 &114694895393249904
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -247,7 +248,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 0}
+  m_Texture: {fileID: 10916, guid: 0000000000000000f000000000000000, type: 0}
   m_UVRect:
     serializedVersion: 2
     x: 0

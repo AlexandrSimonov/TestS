@@ -10,18 +10,17 @@ public class InventoryWindow : ItemWindow {
     public ItemInInventroryWindow prefabObj;
 
     public Inventory inventory;
-    public ItemInInventoryWindowGrid selected;
+    public InventoryWindowSection selected;
 
-    private List<ItemInInventoryWindowGrid> inventoryWindowItems;
+    private List<InventoryWindowSection> inventoryWindowItems;
 
     private void Start() {
-        inventoryWindowItems = new List<ItemInInventoryWindowGrid>();
+        inventoryWindowItems = new List<InventoryWindowSection>();
 
         // Иницилизируем список с индексами и пустыми ItemInInventoryWindowGrid, здесь же создаем префабы для отображения айтемов
         for (int i = 0; i < inventory.maxCountItem; i++) {
-            inventoryWindowItems.Add(new ItemInInventoryWindowGrid {
+            inventoryWindowItems.Add(new InventoryWindowSection {
                 item = null,
-                count = 0,
                 index = i
             });
 
@@ -36,36 +35,31 @@ public class InventoryWindow : ItemWindow {
 
         // Слушатель на добавление новых предметов
         inventory.addItemEvent.AddListener(InventoryAddItem);
-        //inventory.removeItemEvent.AddListener(InventoryRemoveItem);
+        inventory.removeItemEvent.AddListener(InventoryRemoveItem);
     }
 
-    /*public void InventoryRemoveItem(Item item) {
-        foreach (Transform go in parentForObject) {
-            if (go.GetComponent<ItemInGrid>().item == item) {
-                Destroy(go.gameObject);
-                break;
-            }
+    public void InventoryRemoveItem(Item item) {
+        for (int i = 0; i < inventoryWindowItems.Count; i++) {
+            if (inventoryWindowItems[i].item == item && inventoryWindowItems[i].item != null) { 
+                inventoryWindowItems[i].item = null;
+                return;
+            }  
         }
-    }*/
+    }
 
     public void InventoryAddItem(Item item) {
-        ItemInInventoryWindowGrid emptySection = null;
+        InventoryWindowSection emptySection = null;
 
         for (int i = 0; i < inventoryWindowItems.Count; i++) {
-            if (inventoryWindowItems[i].item == item && inventoryWindowItems[i].item != null) {
-                inventoryWindowItems[i].count++;
-                return;
-            }
-            if (inventoryWindowItems[i].item == null && inventoryWindowItems[i].count == 0 && emptySection == null) {
+            if (inventoryWindowItems[i].item == null && emptySection == null) {
                 emptySection = inventoryWindowItems[i];  
             }
         }
     
         emptySection.item = item;
-        emptySection.count = 1;
     }
 
-    public void SetSelectedItem(ItemInInventoryWindowGrid item) {
+    public void SetSelectedItem(InventoryWindowSection item) {
         selected = item;
     }
 
@@ -83,18 +77,17 @@ public class InventoryWindow : ItemWindow {
     
     //Если предмет дейтсвительно нужно выбросить
     public void ThrowOk() {
-        //Debug.Log("Предмет выброшен " + selected.itemName);
-        //inventory.RemoveItem(selected);
+        inventory.ThrowItem(selected.item);
         selected = null;
     }
     // Вызывается событием 
     public void ThrowSelected() {
-        //WindowConfirm.Open("Выбрасывание предмета", "Вы уверенны, что хотите выбросить предмет " + selected.itemName + "?", ThrowOk, null);
+        WindowConfirm.Open("Выбрасывание предмета", "Вы уверенны, что хотите выбросить предмет " + selected.item.itemName + "?", ThrowOk, null);
     }
 
     // Колдование, вызывается событием 
     public void CastSpellSelected() {
-        //CastSpell(selected);
+        CastSpell(selected.item);
     }
 
     // Вызывается для заколдования предмета
@@ -102,12 +95,15 @@ public class InventoryWindow : ItemWindow {
         item.CastSpell();
     }
 
+    public void Move(InventoryWindowSection item1, InventoryWindowSection item2) {
+        Item tmp = item1.item;
+        item1.item = item2.item;
+        item2.item = tmp;
+    }
 
-    [System.Serializable]
-    public class ItemInInventoryWindowGrid {
+    [System.Serializable] // Вот эта штука выполняет роль ячейки
+    public class InventoryWindowSection {
         public Item item;
-
-        public int count;
 
         public int index;
     } 

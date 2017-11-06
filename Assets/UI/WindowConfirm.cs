@@ -4,6 +4,8 @@ using UnityEngine.Events;
 using System.Collections;
 
 public class WindowConfirm : MonoBehaviour {
+    public GameObject background;
+    public GameObject window;
 
     public Text title;
     public Text message;
@@ -14,8 +16,6 @@ public class WindowConfirm : MonoBehaviour {
 
     private void Start() {
         instance = this;
-
-        gameObject.SetActive(false);
     }
 
     public static void Open(string title, string message, UnityAction callbackOk, UnityAction callbackFail) {
@@ -25,18 +25,21 @@ public class WindowConfirm : MonoBehaviour {
         instance.ok = callbackOk;
         instance.fail = callbackFail;
 
-        instance.gameObject.SetActive(true);
+        instance.background.SetActive(true);
+        instance.window.SetActive(true);
     }
 
     public void Okay() {
         instance.ok.Invoke();
-        instance.gameObject.SetActive(false);
+        instance.background.SetActive(false);
+        instance.window.SetActive(false);
     }
 
     public void Fail() {
         if (instance.fail != null) {
             instance.fail.Invoke();
         }
-        instance.gameObject.SetActive(false);
+        instance.background.SetActive(false);
+        instance.window.SetActive(false);
     }
 }

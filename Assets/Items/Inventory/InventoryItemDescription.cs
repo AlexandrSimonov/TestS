@@ -14,7 +14,7 @@ public class InventoryItemDescription : MonoBehaviour {
     public Text itemCount;
 
     public void Update() {
-        if (window.selected != null && window.selected.item != null && window.selected.count != 0) {
+        if (window.selected != null && window.selected.item != null) {
             nameField.text = window.selected.item.itemName;
             imageField.texture = window.selected.item.sprite;
             panel.SetActive(true);

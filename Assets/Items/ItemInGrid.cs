@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+
 // Вот над этим подумать, если нужно будет менять что-то где-то ещё
 public abstract class ItemInGrid : MonoBehaviour {
 
@@ -33,14 +34,5 @@ public abstract class ItemInGrid : MonoBehaviour {
     public void Delete() {
         Destroy(this.gameObject);
     }
-
-    public void Drag() {
-        Debug.Log("Drag");
-    }
-
-    public void Drop() {
-        Debug.Log("Drop");
-    }
-
 
 }

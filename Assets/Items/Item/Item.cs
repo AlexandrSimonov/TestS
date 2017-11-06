@@ -2,8 +2,7 @@
 using UnityEngine.Events;
 using System.Collections;
 
-public abstract class Item : MonoBehaviour, IItem, ICatchItem {
-    
+public abstract class Item : MonoBehaviour, IItem {
     public string itemName;
     public Texture sprite;
     public GameObject model;
@@ -18,10 +17,6 @@ public abstract class Item : MonoBehaviour, IItem, ICatchItem {
     }
 
     public ItemType type;
-    /*Для айтемов нужно будет писать какую-то штуку для сравнения*/
-    public void Catch(Inventory inventory) {
-       // inventory.AddItem(this);
-    }
 
     public void SetOwner(GameObject Owner) {
         this.Owner = Owner;
@@ -39,16 +34,37 @@ public abstract class Item : MonoBehaviour, IItem, ICatchItem {
         SetItemName(itemName + "(заколдованное)");
     }
 
-    public Item GetCopy() {
-        return MemberwiseClone() as Item;
+    /*public static bool operator==(Item item1, Item item2) {
+        Debug.Log(item1 + "" + item2);
+        if (item1 == null || item2 == null) {
+            return false;
+        }
+
+        return item1.itemName == item2.itemName;
     }
 
+    public static bool operator !=(Item item1, Item item2) {
+        if (item1 == null || item2 == null) {
+            return false;
+        }
+
+        return item1.itemName != item2.itemName;
+    }
+
+    public override bool Equals(object item) {
+        if (item == null) {
+            return false;
+        }
+        return (item as Item) == this;
+    }
+
+    public override int GetHashCode() {
+        return base.GetHashCode();
+    }*/
 
     public abstract void GetInfo();
 
     public abstract void Activate();
 
     public abstract void DeActivate();
-
-    
 }

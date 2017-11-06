@@ -12,7 +12,8 @@ public class Inventory : MonoBehaviour {
     private float currentWeight = 0;
 
     public GameObject Owner;
-
+    public GameObject Parent;
+    private Transform world;
     public List<Item> itemInit = new List<Item>();
 
     public List<Item> items = new List<Item>();
@@ -24,8 +25,12 @@ public class Inventory : MonoBehaviour {
 
     void Awake() {
         foreach (Item item in itemInit) {
-            AddItem(item.GetCopy());
+            Item itemCreate = Instantiate(item, Parent.transform); // ВОт тут нужен "физический" рюкзак
+            itemCreate.gameObject.SetActive(false);
+            AddItem(itemCreate);
         }
+        itemInit = null;
+        world = GameObject.FindGameObjectWithTag("World").transform;
     }
 
     public void AddItem(Item item) {
@@ -34,13 +39,21 @@ public class Inventory : MonoBehaviour {
             items.Add(item);
             addItemEvent.Invoke(item);
         }
-
     }
 
     public void RemoveItem(Item item) {
         item.SetOwner(null);
         removeItemEvent.Invoke(item);
         items.Remove(item);
+    }
+
+    // Вот сюда попадает на самом деле префаб почему-то как item
+    // ПОдумать над неидеальностью
+    public void ThrowItem(Item item) {
+        // Сгенерировать модель 3д ВОТ тут лажа и нужно придумать что-то
+        item.transform.SetParent(world);
+        item.gameObject.SetActive(true);
+        RemoveItem(item);
     }
 
     public bool IsCanTake(Item item) {

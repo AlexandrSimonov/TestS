@@ -6,6 +6,7 @@ TagManager:
   tags:
   - targetOfMonster
   - barrier
+  - World
   layers:
   - Default
   - TransparentFX
