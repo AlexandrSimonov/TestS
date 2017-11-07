@@ -5,9 +5,13 @@ using System.Collections.Generic;
 
 public class InventoryWindow : ItemWindow {
 
-    public Transform parentForObject;
+    public Transform gridParent;
+    public Transform listParent;
 
-    public ItemInInventroryWindow prefabObj;
+    public ToolTip tooltip;
+
+    public ItemInInventroryWindow prefabGridItem;
+    public ItemInInventroryWindow prefabListItem;
 
     public Inventory inventory;
     public InventoryWindowSection selected;
@@ -23,9 +27,14 @@ public class InventoryWindow : ItemWindow {
                 item = null,
                 index = i
             });
-
-            ItemInInventroryWindow obj = Instantiate(prefabObj, parentForObject);
+            
+            // В таблицу
+            ItemInInventroryWindow obj = Instantiate(prefabGridItem, gridParent);
             obj.Init(inventoryWindowItems[i], this);
+
+            // В список
+            ItemInInventroryWindow obj2 = Instantiate(prefabListItem, listParent);
+            obj2.Init(inventoryWindowItems[i], this);
         }
 
         // Добавляем в предметы, которые находяться в инвентаре
@@ -85,6 +94,10 @@ public class InventoryWindow : ItemWindow {
         WindowConfirm.Open("Выбрасывание предмета", "Вы уверенны, что хотите выбросить предмет " + selected.item.itemName + "?", ThrowOk, null);
     }
 
+    public void Throw(InventoryWindowSection item) {
+        WindowConfirm.Open("Выбрасывание предмета", "Вы уверенны, что хотите выбросить предмет " + item.item.itemName + "?", ThrowOk, null);
+    }
+
     // Колдование, вызывается событием 
     public void CastSpellSelected() {
         CastSpell(selected.item);
@@ -95,6 +108,8 @@ public class InventoryWindow : ItemWindow {
         item.CastSpell();
     }
 
+
+    // Вот этот метод должен остаться все остальные могут быть удалены, кроме методов работы с массивом item'ов
     public void Move(InventoryWindowSection item1, InventoryWindowSection item2) {
         Item tmp = item1.item;
         item1.item = item2.item;
