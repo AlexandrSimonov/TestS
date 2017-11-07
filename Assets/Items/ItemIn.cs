@@ -2,72 +2,70 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-// Вот над этим подумать, если нужно будет менять что-то где-то ещё
-public abstract class ItemIn : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IDropHandler, ITrashed {
+public class ItemIn : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IDropHandler, ITrashed {
 
     public Text itemName;
     public RawImage itemImage;
-
     public Texture emptyTexture;
 
+    [HideInInspector]
     public InventoryWindow window;
 
-    // Переименовать этот item
-    public InventoryWindow.InventoryWindowSection item;
+    [HideInInspector]
+    public InventoryWindow.InventoryWindowSection selfItem;
 
     public void Init(InventoryWindow.InventoryWindowSection item, InventoryWindow window) {
-        this.item = item;
+        this.selfItem = item;
         this.window = window;
+    }
+
+    protected virtual void SetEmptySection() {
+        itemImage.texture = emptyTexture;
+        itemName.text = "";
     }
 
     private bool dragging = false;
 
-    void Update() {
+    protected virtual void Update() {
         if (dragging) {
             SetEmptySection();
         } else {
-            if (item != null && item.item != null) {
-                itemImage.texture = item.item.sprite;
-                itemName.text = item.item.itemName;
+            if (selfItem != null && selfItem.item != null) {
+                itemImage.texture = selfItem.item.sprite;
+                itemName.text = selfItem.item.itemName;
             } else {
                 SetEmptySection();
             }
         }
     }
 
-    private void SetEmptySection() {
-        itemImage.texture = emptyTexture;
-        itemName.text = "";
-    }
-
     public virtual void OnBeginDrag(PointerEventData pointer) {
-        Debug.Log("Begin Drag");
-        window.tooltip.Activate(this.gameObject);
-        dragging = true;
+        if (pointer.pointerDrag.GetComponent<ItemIn>().selfItem.item != null) {
+            window.tooltip.Activate(this.gameObject);
+            dragging = true;
+        }
     }
 
-    public void OnEndDrag(PointerEventData pointer) {
+    public virtual void OnEndDrag(PointerEventData pointer) {
         window.tooltip.DeActivate();
         dragging = false;
     }
 
-    public virtual void OnDrag(PointerEventData pointer) {
-        //window.tooltip.UpdatePosition(pointer.position);
-    }
+    public virtual void OnDrag(PointerEventData pointer) {}
 
     public virtual void OnDrop(PointerEventData pointer) {
-        ItemInInventroryWindow com = pointer.pointerDrag.GetComponent<ItemInInventroryWindow>();
-        if (com != null && com.item.item != null) {
-            window.Move(GetComponent<ItemInInventroryWindow>().item, pointer.pointerDrag.GetComponent<ItemInInventroryWindow>().item);
+        ItemIn com = pointer.pointerDrag.GetComponent<ItemIn>();
+        if (com != null && com.selfItem.item != null) {
+            window.Move(GetComponent<ItemIn>().selfItem, pointer.pointerDrag.GetComponent<ItemIn>().selfItem);
+            window.SetSelectedItem(this.selfItem);
         }
     }
 
-    public void Select() {
-        window.SetSelectedItem(this.item);
+    public virtual void Select() {
+        window.SetSelectedItem(this.selfItem);
     }
 
-    public void Trashed() {
-        Debug.Log("Объект выбрасывается");
-        window.Throw(item);
+    public virtual void Trashed() {
+        window.Throw(selfItem);
     }
 }

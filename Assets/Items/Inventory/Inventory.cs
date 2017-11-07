@@ -14,6 +14,7 @@ public class Inventory : MonoBehaviour {
     public GameObject Owner;
     public GameObject Parent;
     private Transform world;
+
     public List<Item> itemInit = new List<Item>();
 
     public List<Item> items = new List<Item>();
@@ -24,11 +25,13 @@ public class Inventory : MonoBehaviour {
     public RemoveItemEvent removeItemEvent;
 
     void Awake() {
+
         foreach (Item item in itemInit) {
             Item itemCreate = Instantiate(item, Parent.transform); // ВОт тут нужен "физический" рюкзак
             itemCreate.gameObject.SetActive(false);
             AddItem(itemCreate);
         }
+
         itemInit = null;
         world = GameObject.FindGameObjectWithTag("World").transform;
     }

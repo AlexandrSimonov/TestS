@@ -40,8 +40,8 @@ GameObject:
   - component: {fileID: 114694895393249904}
   - component: {fileID: 114695270842387432}
   - component: {fileID: 114141593462007738}
-  - component: {fileID: 114392471078159920}
   - component: {fileID: 114801668823708152}
+  - component: {fileID: 114875026632517142}
   m_Layer: 5
   m_Name: ItemInInventory
   m_TagString: Untagged
@@ -82,7 +82,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 114392471078159920}
+        - m_Target: {fileID: 114875026632517142}
           m_MethodName: Select
           m_Mode: 1
           m_Arguments:
@@ -95,59 +95,7 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  - eventID: 13
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 114392471078159920}
-          m_MethodName: BeginDrag
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
-        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  - eventID: 14
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 114392471078159920}
-          m_MethodName: EndDrag
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
-        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
---- !u!114 &114392471078159920
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1495361678058164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0059e2157c7aab4e8adb5d72ea929c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: {fileID: 114681497277066608}
-  itemImage: {fileID: 114699766490958448}
-  emptyTexture: {fileID: 10916, guid: 0000000000000000f000000000000000, type: 0}
-  window: {fileID: 0}
-  item:
-    item: {fileID: 0}
-    index: 0
 --- !u!114 &114681497277066608
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -286,6 +234,24 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &114875026632517142
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1495361678058164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e72662f3e6e1441a4c9d0c42776217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: {fileID: 114681497277066608}
+  itemImage: {fileID: 114699766490958448}
+  emptyTexture: {fileID: 10916, guid: 0000000000000000f000000000000000, type: 0}
+  window: {fileID: 0}
+  selfItem:
+    item: {fileID: 0}
+    index: 0
 --- !u!222 &222221391586936156
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -356,7 +322,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

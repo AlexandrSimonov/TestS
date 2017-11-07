@@ -791,7 +791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &319934539
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1761,9 +1761,9 @@ MonoBehaviour:
   gridParent: {fileID: 901005464}
   listParent: {fileID: 1397118474}
   tooltip: {fileID: 319934542}
-  prefabGridItem: {fileID: 114392471078159920, guid: 2566a78cf1c81794ca7831cc0fa67c91,
+  prefabGridItem: {fileID: 114875026632517142, guid: 2566a78cf1c81794ca7831cc0fa67c91,
     type: 2}
-  prefabListItem: {fileID: 114706476056104268, guid: c5dd4c701dcfd3341a00d0efb602bf80,
+  prefabListItem: {fileID: 114841985953959522, guid: c5dd4c701dcfd3341a00d0efb602bf80,
     type: 2}
   inventory: {fileID: 1045155245}
   selected:
@@ -4917,6 +4917,11 @@ Prefab:
     - target: {fileID: 1388588065022290, guid: 1ca4f3f562daa2446a1535086301e196, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224968391557522314, guid: 1ca4f3f562daa2446a1535086301e196,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ca4f3f562daa2446a1535086301e196, type: 2}

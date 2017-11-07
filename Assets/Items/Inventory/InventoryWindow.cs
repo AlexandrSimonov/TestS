@@ -10,8 +10,8 @@ public class InventoryWindow : ItemWindow {
 
     public ToolTip tooltip;
 
-    public ItemInInventroryWindow prefabGridItem;
-    public ItemInInventroryWindow prefabListItem;
+    public ItemIn prefabGridItem;
+    public ItemIn prefabListItem;
 
     public Inventory inventory;
     public InventoryWindowSection selected;
@@ -27,13 +27,13 @@ public class InventoryWindow : ItemWindow {
                 item = null,
                 index = i
             });
-            
+
             // В таблицу
-            ItemInInventroryWindow obj = Instantiate(prefabGridItem, gridParent);
+            ItemIn obj = Instantiate(prefabGridItem, gridParent);
             obj.Init(inventoryWindowItems[i], this);
 
             // В список
-            ItemInInventroryWindow obj2 = Instantiate(prefabListItem, listParent);
+            ItemIn obj2 = Instantiate(prefabListItem, listParent);
             obj2.Init(inventoryWindowItems[i], this);
         }
 
