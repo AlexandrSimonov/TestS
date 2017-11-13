@@ -5,8 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - targetOfMonster
-  - barrier
   - World
+  - Barrier
   layers:
   - Default
   - TransparentFX
