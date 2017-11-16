@@ -16,7 +16,9 @@ public class PathGrid : MonoBehaviour {
 
     public GameObject prefabNode;
     public Transform parentNode;
+
     public Material notEmptyMaterial;
+    public Material borderMaterial;
 
     private PathNode[,] grid;
 
@@ -44,15 +46,14 @@ public class PathGrid : MonoBehaviour {
 
                     grid[i, j] = new PathNode {
                         coo = new Vector3((i + nodeSize / 2), nodeSize / 2, (j + nodeSize / 2)) + startPos,
-                        IsEmpty = false
+                        IsEmpty = true
                     };
 
                     grid[i, j].obj = Instantiate(prefabNode, grid[i, j].coo, new Quaternion(0, 0, 0, 0), parentNode);
                 }
             }
         }
-
-
+        
         // Статичные препятствия
         RaycastHit hit;
 
@@ -62,6 +63,7 @@ public class PathGrid : MonoBehaviour {
 
                 if (hit.collider != null && hit.collider.gameObject.tag == "Barrier") {
                     grid[j, i].obj.GetComponent<MeshRenderer>().material = notEmptyMaterial;
+                    grid[j, i].IsEmpty = false;
                 }
             }
         }
@@ -102,37 +104,55 @@ public class PathGrid : MonoBehaviour {
                 zone1 = GetZoneByNode(i * zoneSize - 1, j);
                 zone2 = GetZoneByNode(i * zoneSize, j);
 
-                //Debug.Log(zone1.id);
-                //Debug.Log(zone2.id);
-
-                if (!grid[i * zoneSize - 1, j].IsEmpty && !grid[i * zoneSize, j].IsEmpty) {
+                if (grid[i * zoneSize - 1, j].IsEmpty && grid[i * zoneSize, j].IsEmpty) {
                     zone1.exits.Add(new PathExit {
                         enter = zone2,
                         PathNodeEnter = grid[i * zoneSize - 1, j],
                         PathNodeExit = grid[i * zoneSize, j],
                     });
+
+                    zone2.exits.Add(new PathExit{
+                        enter = zone1,
+                        PathNodeEnter = grid[i * zoneSize, j],
+                        PathNodeExit = grid[i * zoneSize - 1, j]
+                    });
                 }
             }
         }
 
-        /*foreach (PathZone zone in zones) {
+        for ( int i = 1; i < countZoneX; i++) {
+            for (int j = 0; j < arrSizeY; j++) {
+                zone1 = GetZoneByNode(j, i * zoneSize - 1);
+                zone2 = GetZoneByNode(j , i * zoneSize);
+
+                if (grid[j, i * zoneSize - 1].IsEmpty && grid[j, i * zoneSize].IsEmpty) {
+                    zone1.exits.Add(new PathExit {
+                        enter = zone2,
+                        PathNodeEnter = grid[j, i * zoneSize - 1],
+                        PathNodeExit = grid[j, i * zoneSize],
+                    });
+
+                    zone2.exits.Add(new PathExit {
+                        enter = zone1,
+                        PathNodeEnter = grid[j, i * zoneSize],
+                        PathNodeExit = grid[j, i * zoneSize - 1]
+                    });
+                }
+            }
+        }
+         /*
+        foreach (PathZone zone in zones) {
             Debug.Log(zone.id);
-        }*/
+        }
+        */
 
-
-        /* foreach (PathExit exit in GetZoneByNode(1, 1).exits) {
-            Debug.Log(exit.enter.id);
-        } */
-
-        PathNode[,] local = GetNodeInZone(4);
-
-        foreach (PathNode node in local) {
-            node.obj.GetComponent<MeshRenderer>().material = notEmptyMaterial;
+        foreach (PathExit exit in GetZoneByNode(37, 37).exits) {
+            exit.PathNodeEnter.obj.GetComponent<MeshRenderer>().material = borderMaterial;
         }
 
-        /*foreach (PathZone zone in FindNeighBors(1, 1)) {
+        /* foreach (PathZone zone in FindNeighBors(1, 1)) {
             Debug.Log(zone.id);
-        }*/
+        } */
 
         /* Вот тут можно завтра попробовать добавить юнит тесты, они тут подойдут как ничто другое
         Debug.Log(GetZoneByNode(35, 14).id);
@@ -218,7 +238,7 @@ public class PathGrid : MonoBehaviour {
         return zones[Mathf.FloorToInt(x / zoneSize), Mathf.FloorToInt(y / zoneSize)];
     }
 
-    public void FindPath(Transform target, PathSeeker seeker) {
+    public void FindPath(PathNode target, PathNode current) {
         
     }
 
