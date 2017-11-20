@@ -12,11 +12,19 @@ public class MonsterController : MonoBehaviour {
 
     public GameObject target;
     private NavMeshAgent agent;
-
+    private Hp hp; 
+    
     // Use this for initialization
     void Start() {
         agent = GetComponent<NavMeshAgent>();
         agent.SetDestination(target.transform.position);
+        hp = GetComponent<Hp>();
+
+        hp.OnHpDieEvent.AddListener(Die);
+    }
+
+    private void Die() {
+        WaveControl.MonsterDie(GetComponent<Monster>());
     }
 
     // Update is called once per frame

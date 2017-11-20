@@ -13,16 +13,14 @@ public class WaveControl : MonoBehaviour {
     public UnityEvent OnWaveEnd;
     public UnityEvent OnWaveStart;
 
-    private int countMonster = 0;
-
     public Monster[] monsters;
 
     public Transform parentMonster;
 
     private int strongWave;
+    
 
-    private MonsterSpawnZone zone;
-
+    public List<Monster> waveMonster;
 
     void Start() {
         strongWave = 5;
@@ -30,14 +28,15 @@ public class WaveControl : MonoBehaviour {
         if (monsters == null) {
             Debug.LogError("Массив с монстрами пустой");
         }
-
-        zone = GetComponent<MonsterSpawnZone>();
+        
 
         isEnd = true;
         instance = this;
         instance.OnWaveEnd.Invoke();
 
         GetRandomMonster(4);
+
+        waveMonster = new List<Monster>();
     }
 
     public void WaveStart() {
@@ -47,15 +46,14 @@ public class WaveControl : MonoBehaviour {
 
         while (currentStrong != strongWave) {
             Monster monster = GetRandomMonster(strongWave - currentStrong);
-
-            Instantiate(monster.gameObject, zone.GenerateRandomPoint(), new Quaternion(0, 0, 0, 0), parentMonster);
+            // Вот тут не правльно и нужно выбирать случайную позицию
+            waveMonster.Add(Instantiate(monster.gameObject, new Vector3(0,0,0), new Quaternion(0, 0, 0, 0), parentMonster).GetComponent<Monster>());
 
             currentStrong += monster.strong;
-
-            countMonster++;
-        }
-        
+        } 
     }
+
+    
 
     private Monster GetRandomMonster(int canStrong) {
         Monster[] canMonsters = monsters.Where(monster => monster.strong <= canStrong).ToArray();
@@ -64,10 +62,10 @@ public class WaveControl : MonoBehaviour {
     }
 
 
-    public static void MonsterDie() {
-        instance.countMonster--;
+    public static void MonsterDie(Monster monster) {
+        instance.waveMonster.Remove(monster);
 
-        if (instance.countMonster == 0) {
+        if (instance.waveMonster.Count == 0) {
             instance.OnEnd();
             instance.OnWaveEnd.Invoke();
         }
