@@ -25,6 +25,7 @@ public class MonsterController : MonoBehaviour {
 
     private void Die() {
         WaveControl.MonsterDie(GetComponent<Monster>());
+        hp.OnHpDieEvent.RemoveListener(Die);
     }
 
     // Update is called once per frame
