@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TowerController : MonoBehaviour {
 
-    private IAttack attack;
+    private Attack attack;
     private Hp hp;
     private Monster target;
 
@@ -19,7 +19,7 @@ public class TowerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        attack = GetComponent<IAttack>();
+        attack = GetComponent<Attack>();
         hp = GetComponent<Hp>();
 
        
@@ -55,7 +55,7 @@ public class TowerController : MonoBehaviour {
         if (target == null) {
             target = GetMonster();
         } else {
-            attack.AttackUnit(target.gameObject); // Вообще эта фигня должна принимать IDamaged
+            attack.AttackUnit(target.GetComponent<Damaged>()); // Вообще эта фигня должна принимать IDamaged
         }
 	}
 }

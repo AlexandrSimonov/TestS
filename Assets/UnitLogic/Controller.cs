@@ -76,7 +76,7 @@ public class Controller : MonoBehaviour {
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 
             if (Physics.Raycast(ray, out hit)) {
-                attackComponent.AttackUnit(hit.transform.gameObject);
+                attackComponent.AttackUnit(hit.transform.GetComponent<Damaged>());
             }
         }
     }
