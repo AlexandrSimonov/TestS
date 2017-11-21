@@ -10,6 +10,8 @@ public class Hp : MonoBehaviour {
     public float maxHp = 0;
 
     public HpChangeEvent OnHpChangeEvent;
+    public HpChangeEvent OnHpChangeMinusEvent;
+    public HpChangeEvent OnHpChangePlusEvent;
 
     public UnityEvent OnHpDieEvent;
 
@@ -18,17 +20,19 @@ public class Hp : MonoBehaviour {
     }
 
     public void Plus(float count) {
-        Change(count);   
+        Change(count);
+        OnHpChangePlusEvent.Invoke(count);
     }
 
     public void Minus(float count) {
         Change(-count);
+        OnHpChangeMinusEvent.Invoke(count);
     }
 
     private void Change(float count) {
         hp += count;
 
-        OnHpChangeEvent.Invoke(hp);
+        OnHpChangeEvent.Invoke(count);
 
         if (hp <= 0) {
             OnHpDieEvent.Invoke();

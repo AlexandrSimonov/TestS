@@ -1,47 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class HomeController : MonoBehaviour {
 
-    public float speed = 1;
-    public Animator animator;
-    public SpriteRenderer sprite;
+    private Hp hp;
 
-    public GameObject target = null;
-    public float stop = 0;
 
     void Start() {
-        GameObject[] targets = GameObject.FindGameObjectsWithTag("targetOfMonster");
+        hp = GetComponent<Hp>();
 
-        if (targets.Length > 0) {
+        hp.OnHpChangeMinusEvent.AddListener(AttackNotification);
 
-            target = targets[0];
+        hp.OnHpDieEvent.AddListener(HomeDie);
+    }
 
-            for (int i = 0; i < targets.Length; i++) {
-                if (Vector3.Distance(targets[i].transform.position, transform.position) < Vector3.Distance(target.transform.position, transform.position)) {
-                    target = targets[i];
-                }
-            }
+    private void AttackNotification(float healthPoint) {
+        if (hp.hp > 50) {
+            NotificationMagazine.AddNotification(new Notification(Notification.NotificationPriority.Middle, "Ваш дом атакуют"));
+        } else if (hp.hp <= 50 && hp.hp > 20) {
+            NotificationMagazine.AddNotification(new Notification(Notification.NotificationPriority.Middle, "Ваш дом имеет меньше половины здоровья"));
+        } else {
+            NotificationMagazine.AddNotification(new Notification(Notification.NotificationPriority.High, "Ваш дом почти разрушен"));
         }
-
     }
 
-    // Update is called once per frame
-    void Update() {
-    }
-    
-    private void reset() {
-        animator.SetBool("walk", false);
-        animator.SetBool("hurt", false);
-    }
-
-    public void hpMinus(GameObject from) {
-        animator.SetBool("hurt", true);
-    }
-
-    public void hpDie() {
-        animator.SetBool("die", true);
+    private void HomeDie() {
+        Game.GameOver();
         Debug.Log("Вы проиграли");
     }
+
+    void Update() {
+    }
+
 }

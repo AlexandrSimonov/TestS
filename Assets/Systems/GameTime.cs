@@ -12,9 +12,13 @@ public class GameTime : MonoBehaviour {
     // Delta Time чтобы останавливать анимацию
     public static float deltaTime = 0;
 
+    private void Awake() {
+        Debug.Log("GameTime");
+    }
+
     private void Update() {
         if (isPlayed) {
-            Debug.Log("Обновлилось время");
+            //Debug.Log("Обновлилось время");
             time += Time.deltaTime;
             deltaTime = Time.deltaTime;
         } else {
