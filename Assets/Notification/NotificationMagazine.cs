@@ -15,23 +15,23 @@ public class NotificationMagazine : MonoBehaviourSingelton<NotificationMagazine>
     }
 
     public static NotificationEvent GetAddEvent() {
-        return instance.OnAddNotification;
+        return Instance.OnAddNotification;
     }
 
     public static NotificationEvent GetRemoveEvent() {
-        return instance.OnRemoveNotification;
+        return Instance.OnRemoveNotification;
     }
 
     public static void AddNotification(Notification notification) {
-        instance.notifications.Add(notification);
+        Instance.notifications.Add(notification);
 
-        instance.OnAddNotification.Invoke(notification);
+        Instance.OnAddNotification.Invoke(notification);
     }
 
     public static void RemoveNotification(Notification notification) {
-        instance.notifications.Remove(notification);
+        Instance.notifications.Remove(notification);
 
-        instance.OnRemoveNotification.Invoke(notification);
+        Instance.OnRemoveNotification.Invoke(notification);
     }
 
     public class NotificationEvent : UnityEvent<Notification> { }

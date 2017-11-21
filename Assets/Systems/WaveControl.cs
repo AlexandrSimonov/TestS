@@ -29,7 +29,7 @@ public class WaveControl : MonoBehaviourSingelton<WaveControl> {
 
         isEnd = true;
 
-        instance.OnWaveEnd.Invoke();
+        Instance.OnWaveEnd.Invoke();
 
         GetRandomMonster(4);
 
@@ -37,7 +37,7 @@ public class WaveControl : MonoBehaviourSingelton<WaveControl> {
     }
 
     public static Monster[] GetMonsters() {
-        return instance.waveMonster.ToArray();
+        return Instance.waveMonster.ToArray();
     }
 
     public void WaveStart() {
@@ -64,11 +64,11 @@ public class WaveControl : MonoBehaviourSingelton<WaveControl> {
 
 
     public static void MonsterDie(Monster monster) {
-        instance.waveMonster.Remove(monster);
+        Instance.waveMonster.Remove(monster);
 
-        if (instance.waveMonster.Count == 0) {
-            instance.OnEnd();
-            instance.OnWaveEnd.Invoke();
+        if (Instance.waveMonster.Count == 0) {
+            Instance.OnEnd();
+            Instance.OnWaveEnd.Invoke();
         }
     }
 

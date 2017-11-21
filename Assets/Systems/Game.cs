@@ -17,10 +17,10 @@ public class Game : MonoBehaviourSingelton<Game> {
     }
 
     public static void GamePlay() {
-        instance.gameState = GameState.Play;
+        Instance.gameState = GameState.Play;
     }
 
     public static void GameOver() {
-        instance.gameState = GameState.GameOver;
+        Instance.gameState = GameState.GameOver;
     }
 }

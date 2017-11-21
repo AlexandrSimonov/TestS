@@ -188,6 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63bb1d894837f914fa5d7cf52b808c1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delay: 0
   strong: 0
   range: 0.66
   damageType: 0
@@ -347,25 +348,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
+  maxHp: 0
   OnHpChangeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Hp+HpChangeEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnHpChangeMinusEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Hp+HpChangeEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  OnHpChangePlusEvent:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: Hp+HpChangeEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   OnHpDieEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114534557836063434}
-        m_MethodName: OnHpDie
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
 --- !u!114 &114999076192825538
@@ -430,7 +431,7 @@ SpriteRenderer:
   m_Size: {x: 7.69, y: 5.53}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
 --- !u!222 &222013886331963856
 CanvasRenderer:

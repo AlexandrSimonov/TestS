@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 // Установить для него приоритет запуска меньше чем у других
 // Узнать как делают другие
 public class GameTime : MonoBehaviour {
 
-    
     public static bool isPlayed = true;
     // Игровое время, возможно нужна корутина
     public static float time = 0;
@@ -33,4 +31,5 @@ public class GameTime : MonoBehaviour {
     public static void Resume() {
         isPlayed = true;
     }
+
 }

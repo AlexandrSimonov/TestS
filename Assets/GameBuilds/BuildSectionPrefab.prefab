@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 23151915013830688}
   - component: {fileID: 114311417228305104}
   - component: {fileID: 64484596853604198}
-  - component: {fileID: 114961653314159048}
   m_Layer: 0
   m_Name: BuildSectionPrefab
   m_TagString: Untagged
@@ -113,17 +112,3 @@ MonoBehaviour:
   activateMaterial: {fileID: 2100000, guid: e2310485f1308844cb0e8adfcfbe5b92, type: 2}
   defaultMaterial: {fileID: 2100000, guid: 008f6dd33e0b24445a983b0e14961ece, type: 2}
   tempMaterial: {fileID: 2100000, guid: 50588e20601d1184faa5113098ddb08b, type: 2}
---- !u!114 &114961653314159048
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1172999868538050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 609443c314d3eed418b8dc7d6003a163, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buildGrid: {fileID: 0}
-  building: {fileID: 0}
-  buildMode: 0

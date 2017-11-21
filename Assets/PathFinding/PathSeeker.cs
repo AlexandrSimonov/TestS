@@ -11,5 +11,5 @@ public class PathSeeker : MonoBehaviour {
     public int size = 1;
     public GameObject target;
 
-    public Path path;
+    public PathFindingPath path;
 }

@@ -3,9 +3,9 @@ using System.Collections;
 
 public class MonoBehaviourSingelton <T> : MonoBehaviour where T : MonoBehaviour {
 
-    protected static T instance = null;
+    private static T instance = null;
 
-    public static T Instance {
+    protected static T Instance {
         get {
             if (instance == null) {
                 instance = (T)FindObjectOfType(typeof(T));

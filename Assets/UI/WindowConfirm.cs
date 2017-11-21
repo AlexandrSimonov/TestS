@@ -14,27 +14,27 @@ public class WindowConfirm : MonoBehaviourSingelton<WindowConfirm> {
     private UnityAction fail;
 
     public static void Open(string title, string message, UnityAction callbackOk, UnityAction callbackFail) {
-        instance.title.text = title;
-        instance.message.text = message;
+        Instance.title.text = title;
+        Instance.message.text = message;
 
-        instance.ok = callbackOk;
-        instance.fail = callbackFail;
+        Instance.ok = callbackOk;
+        Instance.fail = callbackFail;
 
-        instance.background.SetActive(true);
-        instance.window.SetActive(true);
+        Instance.background.SetActive(true);
+        Instance.window.SetActive(true);
     }
 
     public void Okay() {
-        instance.ok.Invoke();
-        instance.background.SetActive(false);
-        instance.window.SetActive(false);
+        Instance.ok.Invoke();
+        Instance.background.SetActive(false);
+        Instance.window.SetActive(false);
     }
 
     public void Fail() {
-        if (instance.fail != null) {
-            instance.fail.Invoke();
+        if (Instance.fail != null) {
+            Instance.fail.Invoke();
         }
-        instance.background.SetActive(false);
-        instance.window.SetActive(false);
+        Instance.background.SetActive(false);
+        Instance.window.SetActive(false);
     }
 }
