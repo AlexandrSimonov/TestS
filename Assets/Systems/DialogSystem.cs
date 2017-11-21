@@ -2,16 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogSystem : MonoBehaviour {
+public class DialogSystem : MonoBehaviourSingelton<DialogSystem> {
 
     public GameObject parent;
     public GameObject DialogMessage;
-
-    public static DialogSystem instance;
-
-    private void Start() {
-        DialogSystem.instance = this;
-    }
 
     public static void AddMessage(string text, float time) {
         GameObject message = Instantiate(instance.DialogMessage, instance.parent.transform);

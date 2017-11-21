@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using System.Collections;
 
-public class WindowConfirm : MonoBehaviour {
+public class WindowConfirm : MonoBehaviourSingelton<WindowConfirm> {
     public GameObject background;
     public GameObject window;
 
@@ -12,11 +12,6 @@ public class WindowConfirm : MonoBehaviour {
 
     private UnityAction ok;
     private UnityAction fail;
-    private static WindowConfirm instance;
-
-    private void Start() {
-        instance = this;
-    }
 
     public static void Open(string title, string message, UnityAction callbackOk, UnityAction callbackFail) {
         instance.title.text = title;

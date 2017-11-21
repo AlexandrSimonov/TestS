@@ -4,11 +4,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Linq;
 
-public class WaveControl : MonoBehaviour {
+public class WaveControl : MonoBehaviourSingelton<WaveControl> {
 
     public bool isEnd;
-
-    private static WaveControl instance;
 
     public UnityEvent OnWaveEnd;
     public UnityEvent OnWaveStart;
@@ -28,10 +26,9 @@ public class WaveControl : MonoBehaviour {
         if (monsters == null) {
             Debug.LogError("Массив с монстрами пустой");
         }
-        
 
         isEnd = true;
-        instance = this;
+
         instance.OnWaveEnd.Invoke();
 
         GetRandomMonster(4);

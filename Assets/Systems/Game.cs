@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Game : MonoBehaviour {
+public class Game : MonoBehaviourSingelton<Game> {
 
     public enum GameState {
         Begin,
@@ -11,11 +11,9 @@ public class Game : MonoBehaviour {
 
     [HideInInspector]
     public GameState gameState;
-
-    public static Game instance;
+    
     void Start() {
         gameState = GameState.Begin;
-        instance = this;
     }
 
     public static void GamePlay() {

@@ -4,15 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class MagicDust : MonoBehaviour {
+public class MagicDust : MonoBehaviourSingelton<MagicDust> {
 
     public Text text;
-    private static MagicDust instance;
     private int money;
 
     void Start() {
         money = 200;
-        instance = this;
     }
 
     private static void Set(int mon) {

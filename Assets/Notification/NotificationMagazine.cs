@@ -2,9 +2,8 @@
 using UnityEngine.Events;
 using System.Collections.Generic;
 
-public class NotificationMagazine : MonoBehaviour {
+public class NotificationMagazine : MonoBehaviourSingelton<NotificationMagazine> {
 
-    private static NotificationMagazine instance;
 
     private List<Notification> notifications;
 
@@ -12,7 +11,6 @@ public class NotificationMagazine : MonoBehaviour {
     public NotificationEvent OnRemoveNotification;
 
     private void Start() {
-        instance = this;
         notifications = new List<Notification>();
     }
 
