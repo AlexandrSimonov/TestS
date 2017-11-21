@@ -9,13 +9,12 @@ public abstract class Attack : MonoBehaviour, IAttack {
 
     public float strong = 0;
     public float range = 0;
-    public float attackDistance = 1;
 
     public DamageType damageType;
 
-    public abstract void AttackUnit(GameObject target);
+    public abstract void AttackUnit(Damaged target);
 
     public float GetDistanceAttack() {
-        return attackDistance;
+        return range;
     }
 }

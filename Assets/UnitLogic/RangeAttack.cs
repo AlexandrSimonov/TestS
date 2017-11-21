@@ -10,17 +10,18 @@ public class RangeAttack : Attack {
     public Transform pos;
     public Animator animator;
 
-    private GameObject target;
+    private Damaged target;
 
-    public override void AttackUnit(GameObject target) {
+    public override void AttackUnit(Damaged target) {
         animator.SetBool("attack", true);
+        
         this.target = target;
     }
 
     public void AttackMoment() {
-        if (target.GetComponent<IDamaged>() != null && Vector3.Distance(target.transform.position, transform.position) <= range && Time.time >= timerDelay) {
+        if (target != null && Vector3.Distance(target.transform.position, transform.position) <= range && Time.time >= timerDelay) {
             Shell shellObj = Instantiate(shell.gameObject, pos.position + new Vector3(0, 0, shell.GetComponent<SphereCollider>().radius), new Quaternion()).GetComponent<Shell>();
-            shellObj.Init(target, strong, damageType);
+            shellObj.Init(target.gameObject, strong, damageType);
             timerDelay = Time.time + delay;
         }
     }

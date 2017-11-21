@@ -5,13 +5,10 @@ using UnityEngine;
 [AddComponentMenu("Unit/Attack/MeleeAttack")]
 public class MeleeAttack : Attack {
     
-    public override void AttackUnit(GameObject target) {
+    public override void AttackUnit(Damaged target) {
         if (Vector2.Distance(target.transform.position, transform.position) <= range && Time.time >= timerDelay) {
-            IDamaged damaged = target.GetComponent<IDamaged>();
-            if (damaged != null) {
-                damaged.Hit(strong, damageType);
-                timerDelay = Time.time + delay;
-            }
+            target.Hit(strong, damageType);
+            timerDelay = Time.time + delay;
         } 
     }
 

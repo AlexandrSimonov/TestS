@@ -6,6 +6,7 @@ using UnityEngine;
 public class TowerController : MonoBehaviour {
 
     private IAttack attack;
+    private Hp hp;
     private Monster target;
 
     public enum TowerMode {
@@ -19,7 +20,9 @@ public class TowerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         attack = GetComponent<IAttack>();
+        hp = GetComponent<Hp>();
 
+       
         target = null;
         mode = TowerMode.DefaultAttack;
 	}

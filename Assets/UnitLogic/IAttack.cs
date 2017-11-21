@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public interface IAttack {
-    void AttackUnit(GameObject target);
+    void AttackUnit(Damaged target);
 
     float GetDistanceAttack();
 }
