@@ -4,4 +4,6 @@ using UnityEngine;
 
 public interface IAttack {
     void AttackUnit(GameObject target);
+
+    float GetDistanceAttack();
 }

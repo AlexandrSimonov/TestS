@@ -39,6 +39,10 @@ public class WaveControl : MonoBehaviour {
         waveMonster = new List<Monster>();
     }
 
+    public static Monster[] GetMonsters() {
+        return instance.waveMonster.ToArray();
+    }
+
     public void WaveStart() {
         OnWaveStart.Invoke();
 
