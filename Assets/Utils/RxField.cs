@@ -5,8 +5,6 @@ public class RxField<T> : System.Object {
     private T _value;
     public RxEvent OnChangeEvent = new RxEvent();
 
-    public int k = 0;
-
     public T Value {
         get {
             return _value;
