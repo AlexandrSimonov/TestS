@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using System.Collections.Generic;
 
 /*
@@ -17,11 +18,13 @@ using System.Collections.Generic;
  При реализации, мы будем использовать гит для хранения переводов, то есть отдельная ветка в которую можно будет делать переводики
 */
 
-[ExecuteInEditMode]
 public class Localization : MonoBehaviourSingelton<Localization> {
 
     public LocalizationLocal[] locales;
     public LocalizationLocal current = null;
+
+    public UnityEvent OnChangeLocale;
+
     // Если локаль не используется, то для неё очищаем словарь, чтобы не занимать ОЗУ
     private void Start() {
         InitLocales();
@@ -30,15 +33,6 @@ public class Localization : MonoBehaviourSingelton<Localization> {
             current = locales[0];
         }
     }
-
-    private void Awake() {
-        InitLocales();
-
-        if (locales[0] != null) {
-            current = locales[0];
-        }
-    }
-
 
     [ContextMenu("Инициализация локалей")]
     private void InitLocales() {
@@ -58,6 +52,8 @@ public class Localization : MonoBehaviourSingelton<Localization> {
         if (Instance.current == null) {
         //Значит локаль не найдена, нужна ошибка
         }
+
+        Instance.OnChangeLocale.Invoke();
     }
 
     public static string[] GetLocalNames() {
@@ -84,7 +80,7 @@ public class Localization : MonoBehaviourSingelton<Localization> {
     }
 
     public static string GetWord(string key) {
-        string value = "";
+        string value;
 
         if (Instance.current.dictionary.TryGetValue(key, out value)) {
             return value;
@@ -93,4 +89,9 @@ public class Localization : MonoBehaviourSingelton<Localization> {
             return GetWordFromKey(key);
         }
     }
+
+    public static UnityEvent GetOnChangeLocale() {
+        return Instance.OnChangeLocale;
+    }
+
 }

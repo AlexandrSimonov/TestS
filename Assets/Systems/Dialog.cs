@@ -10,12 +10,12 @@ public class Dialog : MonoBehaviour {
 
     public void Init(string text, float time) {
         textComponent.text = text;
-        timeStart = GameTime.time + time;
+        timeStart = Time.time + time;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (timeStart - GameTime.time < 0) {
+        if (timeStart - Time.time < 0) {
             Close();
         }
 	}

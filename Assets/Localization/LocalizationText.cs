@@ -2,17 +2,21 @@
 using UnityEngine.UI;
 using System.Collections;
 
-[ExecuteInEditMode]
+
 public class LocalizationText : MonoBehaviour {
 
     public string Key;
-
+    private Text field;
     private void Start() {
         //Debug.Log("text");
-        GetComponent<Text>().text = Localization.GetWord(Key);
+        field = GetComponent<Text>();
+
+        Changed();
+
+        Localization.GetOnChangeLocale().AddListener(Changed);
     }
 
-    private void Update() {
-        GetComponent<Text>().text = Localization.GetWord(Key);
+    private void Changed() {
+        field.text = Localization.GetWord(Key);
     }
 }
