@@ -4627,7 +4627,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1bbd59a5f203b44a99dae2a0233ab74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hotkey: 0
   mask: {fileID: 1201799082}
   window: {fileID: 845371015}
   isOpened: 0
@@ -4897,6 +4896,7 @@ GameObject:
   - component: {fileID: 1045155240}
   - component: {fileID: 1045155241}
   - component: {fileID: 1045155237}
+  - component: {fileID: 1045155244}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -5002,6 +5002,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 329876201}
+--- !u!114 &1045155244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1045155236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4efc736254df7bd42abec4a9264ba543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1045155245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6973,6 +6984,7 @@ GameObject:
   - component: {fileID: 1408882983}
   - component: {fileID: 1408882985}
   - component: {fileID: 1408882984}
+  - component: {fileID: 1408882986}
   m_Layer: 5
   m_Name: InventoryPanel
   m_TagString: Untagged
@@ -7010,7 +7022,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1bbd59a5f203b44a99dae2a0233ab74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hotkey: 105
   mask: {fileID: 1201799082}
   window: {fileID: 510568737}
   isOpened: 1
@@ -7020,6 +7031,35 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1408882982}
+--- !u!114 &1408882986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1408882982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccde8c6fdeee8664da56dbb1007249ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hotkey: 105
+  action:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    m_CallsDirty: 1
 --- !u!1 &1417798445
 GameObject:
   m_ObjectHideFlags: 0

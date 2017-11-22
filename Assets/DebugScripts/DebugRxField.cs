@@ -3,11 +3,13 @@ using System.Collections;
 
 public class DebugRxField : MonoBehaviour {
 
+
     public RxField<int> num;
 
     // Use this for initialization
     void Start() {
         num = new RxField<int>(2);
+
         num.OnChangeEvent.AddListener(Changed);
 
         num.Value = 1;
