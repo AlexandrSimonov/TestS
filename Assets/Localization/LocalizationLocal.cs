@@ -12,6 +12,7 @@ public class LocalizationLocal  {
     public Dictionary<string, string> dictionary = new Dictionary<string, string>();
 
     public void Init() {
+        dictionary.Clear();
         LoadLocal();      
     }
 
@@ -28,15 +29,19 @@ public class LocalizationLocal  {
             string[] files = Directory.GetFiles(pathFolder, "*.json");
 
             foreach (string file in files) {
-                StreamReader reader = new StreamReader(file, Encoding.UTF8);
-
-                string text = reader.ReadToEnd();
-
                 try {
+                    StreamReader reader = new StreamReader(file, Encoding.UTF8);
+
+                    string text = reader.ReadToEnd();
+
+                
                     foreach (KeyValuePair<string, string> st in JsonConvert.DeserializeObject<Dictionary<string, string>>(text)) {
                         // Вот тут стоит уточнить, чтобы не было файлов с непонятными именами, нужно уточнять, что точки в инменах лучше не ставить
                         dictionary.Add(Path.GetFileNameWithoutExtension(file) + "." + st.Key, st.Value);
                     }
+                
+                    reader.Close();
+
                 } catch (JsonException e2) {
                     // Вот тут может быть конект с каким-то баг трекером
                     Debug.Log(e2.Message.ToString());

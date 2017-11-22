@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-
 /*
  Надо где-то описывать правила
  
@@ -12,9 +11,12 @@ using System.Collections.Generic;
  Если нужно использовать несколько слов, то используем CamelCase
 
  Названия ключа должно быть без спец символов и точек
-
- 
 */
+
+/*
+ При реализации, мы будем использовать гит для хранения переводов, то есть отдельная ветка в которую можно будет делать переводики
+*/
+
 [ExecuteInEditMode]
 public class Localization : MonoBehaviourSingelton<Localization> {
 
@@ -22,15 +24,50 @@ public class Localization : MonoBehaviourSingelton<Localization> {
     public LocalizationLocal current = null;
     // Если локаль не используется, то для неё очищаем словарь, чтобы не занимать ОЗУ
     private void Start() {
-        foreach (LocalizationLocal local in locales) {
-            local.Init();
-        }
+        InitLocales();
 
         if (locales[0] != null) {
             current = locales[0];
         }
+    }
 
-        Debug.Log("123");
+    private void Awake() {
+        InitLocales();
+
+        if (locales[0] != null) {
+            current = locales[0];
+        }
+    }
+
+
+    [ContextMenu("Инициализация локалей")]
+    private void InitLocales() {
+        // Тут стоит сделать проверку, чтобы не было одинаковых локалей двух
+
+        foreach (LocalizationLocal local in locales) {
+            local.Init();
+        }
+    }
+
+    public static void ChangeLocale(int index) {
+        Instance.current = null;
+        if (Instance.locales[index] != null) {
+            Instance.current = Instance.locales[index];
+        }
+
+        if (Instance.current == null) {
+        //Значит локаль не найдена, нужна ошибка
+        }
+    }
+
+    public static string[] GetLocalNames() {
+        string[] names = new string[Instance.locales.Length];
+
+        for (int i = 0; i < Instance.locales.Length; i++) {
+            names[i] = Instance.locales[i].localName;
+        }
+
+        return names;
     }
 
     // ПРотестируем если в ключе два пробела, нет пробелов и т.д
@@ -48,10 +85,6 @@ public class Localization : MonoBehaviourSingelton<Localization> {
 
     public static string GetWord(string key) {
         string value = "";
-
-        foreach (KeyValuePair<string, string> pair in Instance.current.dictionary) {
-            Debug.Log(pair.Key + " "  + pair.Value);
-        }
 
         if (Instance.current.dictionary.TryGetValue(key, out value)) {
             return value;
