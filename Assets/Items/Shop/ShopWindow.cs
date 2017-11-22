@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ShopWindow : ItemWindow {
+public class ShopWindow : MonoBehaviour {
     /**
         Вот тут можно
      */

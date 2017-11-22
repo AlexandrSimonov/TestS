@@ -4,8 +4,8 @@ using UnityEngine.Events;
 using System.Collections;
 
 public class WindowConfirm : MonoBehaviourSingelton<WindowConfirm> {
-    public GameObject background;
-    public GameObject window;
+
+    public Window window;
 
     public Text title;
     public Text message;
@@ -20,21 +20,20 @@ public class WindowConfirm : MonoBehaviourSingelton<WindowConfirm> {
         Instance.ok = callbackOk;
         Instance.fail = callbackFail;
 
-        Instance.background.SetActive(true);
-        Instance.window.SetActive(true);
+        Instance.window.Open();
     }
 
     public void Okay() {
         Instance.ok.Invoke();
-        Instance.background.SetActive(false);
-        Instance.window.SetActive(false);
+
+        Instance.window.Close();
     }
 
     public void Fail() {
         if (Instance.fail != null) {
             Instance.fail.Invoke();
         }
-        Instance.background.SetActive(false);
-        Instance.window.SetActive(false);
+        
+        Instance.window.Close();
     }
 }

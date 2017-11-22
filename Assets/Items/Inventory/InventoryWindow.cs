@@ -3,7 +3,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class InventoryWindow : ItemWindow {
+public class InventoryWindow : MonoBehaviour {
 
     public Transform gridParent;
     public Transform listParent;
