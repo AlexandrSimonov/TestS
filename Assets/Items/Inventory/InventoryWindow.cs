@@ -43,8 +43,8 @@ public class InventoryWindow : MonoBehaviour {
         }
 
         // Слушатель на добавление новых предметов
-        inventory.addItemEvent.AddListener(InventoryAddItem);
-        inventory.removeItemEvent.AddListener(InventoryRemoveItem);
+        inventory.items.OnAddEvent.AddListener(InventoryAddItem);
+        inventory.items.OnRemoveEvent.AddListener(InventoryRemoveItem);
     }
 
     public void InventoryRemoveItem(Item item) {

@@ -17,12 +17,9 @@ public class Inventory : MonoBehaviour {
 
     public List<Item> itemInit = new List<Item>();
 
-    public List<Item> items = new List<Item>();
-
-    [HideInInspector]
-    public AddItemEvent addItemEvent;
-    [HideInInspector]
-    public RemoveItemEvent removeItemEvent;
+    //Вот этот участок не прошел проверку) на вшивость)
+    // Протестировать эти вызовы из инвентаря
+    public RxList<Item> items = new RxList<Item>();
 
     void Awake() {
 
@@ -40,13 +37,11 @@ public class Inventory : MonoBehaviour {
         if (IsCanTake(item)) {
             item.SetOwner(Owner);
             items.Add(item);
-            addItemEvent.Invoke(item);
         }
     }
 
     public void RemoveItem(Item item) {
         item.SetOwner(null);
-        removeItemEvent.Invoke(item);
         items.Remove(item);
     }
 
