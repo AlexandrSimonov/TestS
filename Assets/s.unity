@@ -5098,7 +5098,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1045155236}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4efc736254df7bd42abec4a9264ba543, type: 3}
   m_Name: 
@@ -5123,17 +5123,6 @@ MonoBehaviour:
   - {fileID: 114462735152786066, guid: 02d8295b4d8c05e4882ca0436fd8d4f5, type: 2}
   - {fileID: 114738246040724994, guid: 9645a14d1cc7bce418e92d6fb19dab67, type: 2}
   - {fileID: 114738246040724994, guid: 9645a14d1cc7bce418e92d6fb19dab67, type: 2}
-  items: []
-  addItemEvent:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: Inventory+AddItemEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  removeItemEvent:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: Inventory+RemoveItemEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
 --- !u!114 &1045155246
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,13 +10,15 @@ public class DebugRxList : MonoBehaviour {
         integers.OnAddEvent.AddListener(OnAdd);
         integers.OnRemoveEvent.AddListener(OnRemove);
 
-        integers.Add(1);
-        integers.Add(2);
-        integers.Add(3);
+        integers.RxAdd(1);
+        integers.RxAdd(2);
+        integers.RxAdd(3);
 
-        integers.Remove(2);
+        integers.RxRemove(2);
 
         Debug.Log("---Список---");
+
+        //integers.RxClear();
 
         foreach (int i in integers) {
             Debug.Log(i);

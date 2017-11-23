@@ -5,18 +5,22 @@ public class RxList<T> : List<T> {
 
     public RxEvent OnAddEvent = new RxEvent();
     public RxEvent OnRemoveEvent = new RxEvent();
+    public UnityEvent OnClearEvent = new UnityEvent();
 
-    public new void Add(T item) {
+    // Приставка Rx будет значить, что вызов метода вызывает событие
+    public void RxAdd(T item) {
         base.Add(item);
-
-        // И вот тут магия
         OnAddEvent.Invoke(item);
     }
 
-    public new void Remove(T item) {
+    public void RxRemove(T item) {
         base.Remove(item);
-
         OnRemoveEvent.Invoke(item);
+    }
+
+    public void RxClear() {
+        base.Clear();
+        OnClearEvent.Invoke();
     }
 
     public class RxEvent : UnityEvent<T> { }

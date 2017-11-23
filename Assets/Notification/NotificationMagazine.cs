@@ -20,11 +20,11 @@ public class NotificationMagazine : MonoBehaviourSingelton<NotificationMagazine>
     }
 
     public static void AddNotification(Notification notification) {
-        Instance.notifications.Add(notification);
+        Instance.notifications.RxAdd(notification);
     }
 
     public static void RemoveNotification(Notification notification) {
-        Instance.notifications.Remove(notification);
+        Instance.notifications.RxRemove(notification);
     }
 
     public class NotificationEvent : UnityEvent<Notification> { }
