@@ -9,6 +9,7 @@ public class DebugRxList : MonoBehaviour {
     void Start() {
         integers.OnAddEvent.AddListener(OnAdd);
         integers.OnRemoveEvent.AddListener(OnRemove);
+        integers.OnClearEvent.AddListener(OnClear);
 
         integers.RxAdd(1);
         integers.RxAdd(2);
@@ -18,7 +19,7 @@ public class DebugRxList : MonoBehaviour {
 
         Debug.Log("---Список---");
 
-        //integers.RxClear();
+        integers.RxClear();
 
         foreach (int i in integers) {
             Debug.Log(i);
@@ -31,5 +32,9 @@ public class DebugRxList : MonoBehaviour {
 
     private void OnRemove(int item) {
         Debug.Log("Remove " + item);
+    }
+
+    private void OnClear() {
+        Debug.Log("Clear");
     }
 }

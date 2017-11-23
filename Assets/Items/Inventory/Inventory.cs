@@ -22,7 +22,8 @@ public class Inventory : MonoBehaviour {
     public RxList<Item> items = new RxList<Item>();
 
     void Awake() {
-
+        // FOREACH 
+        // В этой статье(https://habrahabr.ru/post/314306/) было сказано об foreach как не совсем подходящем методе и нужно бы его заменить на for 
         foreach (Item item in itemInit) {
             Item itemCreate = Instantiate(item, Parent.transform); // ВОт тут нужен "физический" рюкзак
             itemCreate.gameObject.SetActive(false);
@@ -32,17 +33,17 @@ public class Inventory : MonoBehaviour {
         itemInit = null;
         world = GameObject.FindGameObjectWithTag("World").transform;
     }
-
+    
     public void AddItem(Item item) {
         if (IsCanTake(item)) {
             item.SetOwner(Owner);
-            items.Add(item);
+            items.RxAdd(item);
         }
     }
 
     public void RemoveItem(Item item) {
         item.SetOwner(null);
-        items.Remove(item);
+        items.RxRemove(item);
     }
 
     // Вот сюда попадает на самом деле префаб почему-то как item
@@ -68,9 +69,8 @@ public class Inventory : MonoBehaviour {
         return true;
     }
 
-    [System.Serializable]
-    public class AddItemEvent : UnityEvent<Item> {}
-
-    [System.Serializable]
-    public class RemoveItemEvent : UnityEvent<Item> { }
+    private void OnDestroy() {
+        items.OnAddEvent.RemoveListener(AddItem);
+        items.OnRemoveEvent.RemoveListener(RemoveItem);
+    }
 }

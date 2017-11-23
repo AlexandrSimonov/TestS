@@ -23,5 +23,15 @@ public class RxList<T> : List<T> {
         OnClearEvent.Invoke();
     }
 
+    ~RxList() {
+        RemoveAllListners();
+    }
+
+    public void RemoveAllListners() {
+        OnAddEvent.RemoveAllListeners();
+        OnRemoveEvent.RemoveAllListeners();
+        OnClearEvent.RemoveAllListeners();
+    }
+
     public class RxEvent : UnityEvent<T> { }
 }
