@@ -9,8 +9,8 @@ public class NotificationMagazineWindow : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        NotificationMagazine.GetAddEvent().AddListener(AddNotification);
-        NotificationMagazine.GetRemoveEvent().AddListener(RemoveNotification);
+        NotificationMagazine.OnAddEvent.AddListener(AddNotification);
+        NotificationMagazine.OnRemoveEvent.AddListener(RemoveNotification);
     }
 
 

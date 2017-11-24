@@ -17,8 +17,8 @@ using System.Collections.Generic;
 /*
  При реализации, мы будем использовать гит для хранения переводов, то есть отдельная ветка в которую можно будет делать переводики
 */
-
-public class Localization : MonoBehaviourSingelton<Localization> {
+[CreateAssetMenu(fileName = "Localization", menuName = "SingletonCreate/Localization", order = 1)]
+public class Localization : ScriptableObjectSingleton<Localization> {
 
     public LocalizationLocal[] locales;
     public LocalizationLocal current = null;

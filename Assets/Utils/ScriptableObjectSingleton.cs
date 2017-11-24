@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEditor;
 
-public abstract class MonoBehaviourSingelton <T> : MonoBehaviour where T : MonoBehaviour {
-
+public abstract class ScriptableObjectSingleton<T> : ScriptableObject where T : ScriptableObject {
     private static T instance = null;
 
     protected static T Instance {

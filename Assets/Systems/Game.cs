@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Game : MonoBehaviourSingelton<Game> {
+[CreateAssetMenu(fileName = "Game", menuName = "SingletonCreate/Game", order = 1)]
+public class Game : ScriptableObjectSingleton<Game> {
 
     public enum GameState {
         Begin,
