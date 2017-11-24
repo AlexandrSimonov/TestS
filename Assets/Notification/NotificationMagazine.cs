@@ -11,12 +11,16 @@ public class NotificationMagazine : MonoBehaviourSingelton<NotificationMagazine>
         notifications = new RxList<Notification>();
     }
 
-    public static RxList<Notification>.RxEvent GetAddEvent() {
-        return Instance.notifications.OnAddEvent;
+    public static RxList<Notification>.RxEvent OnAddEvent{
+        get {
+            return Instance.notifications.OnAddEvent;
+        }
     }
 
-    public static RxList<Notification>.RxEvent GetRemoveEvent() {
-        return Instance.notifications.OnRemoveEvent;
+    public static RxList<Notification>.RxEvent OnRemoveEvent {
+        get {
+            return Instance.notifications.OnAddEvent;
+        }
     }
 
     public static void AddNotification(Notification notification) {

@@ -10,6 +10,7 @@ public class Hub : MonoBehaviour {
     private Image[] sections;
     public GameObject hubSection;
     public Text text;
+    public Hp Parent;
 
     void Awake() {
         sections = new Image[sectionCount];
@@ -23,15 +24,14 @@ public class Hub : MonoBehaviour {
     private float hpInSection;
 
     void Start() {
-        Hp hp = transform.parent.GetComponent<Hp>();
 
-        if (hp != null) {
-            this.maxHp = hp.hp;
+        if (Parent != null) {
+            this.maxHp = Parent.hp;
             hpInSection = maxHp / sectionCount;
 
-            ChangeHp(hp.hp);
+            ChangeHp(Parent.hp);
 
-            hp.OnHpChangeEvent.AddListener(ChangeHp);
+            Parent.OnHpChangeEvent.AddListener(ChangeHp);
         } else {
             Debug.LogError("В объекта родителя нет компонента здоровья");
         }
@@ -50,5 +50,9 @@ public class Hub : MonoBehaviour {
         }
 
         text.text = Mathf.Ceil(hp) + " / " + maxHp;
+    }
+
+    private void OnDestroy() {
+        Parent.OnHpChangeEvent.RemoveListener(ChangeHp);
     }
 }

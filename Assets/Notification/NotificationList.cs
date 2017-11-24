@@ -4,8 +4,8 @@ using System.Collections;
 public class NotificationList : MonoBehaviour {
 
     void Start() {
-        NotificationMagazine.GetAddEvent().AddListener(AddNotification);
-        NotificationMagazine.GetRemoveEvent().AddListener(RemoveNotification);
+        NotificationMagazine.OnAddEvent.AddListener(AddNotification);
+        NotificationMagazine.OnRemoveEvent.AddListener(RemoveNotification);
     }
 
 

@@ -23,6 +23,7 @@ public class Localization : MonoBehaviourSingelton<Localization> {
     public LocalizationLocal[] locales;
     public LocalizationLocal current = null;
 
+    [HideInInspector]
     public UnityEvent OnChangeLocale;
 
     // Если локаль не используется, то для неё очищаем словарь, чтобы не занимать ОЗУ

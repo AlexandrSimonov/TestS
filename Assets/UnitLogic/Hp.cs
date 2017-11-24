@@ -7,12 +7,17 @@ public class Hp : MonoBehaviour {
 
     [HideInInspector]
     public float hp = 0;
+
     public float maxHp = 0;
 
+    [HideInInspector]
     public HpChangeEvent OnHpChangeEvent;
+    [HideInInspector]
     public HpChangeEvent OnHpChangeMinusEvent;
+    [HideInInspector]
     public HpChangeEvent OnHpChangePlusEvent;
 
+    [HideInInspector]
     public UnityEvent OnHpDieEvent;
 
     private void Start() {
