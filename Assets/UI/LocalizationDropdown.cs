@@ -9,8 +9,14 @@ public class LocalizationDropdown : MonoBehaviour {
 
     private Dropdown dropdown;
 
+    public Dictionary<string, string> languages = new Dictionary<string, string>();
+
     void Start() {
         dropdown = GetComponent<Dropdown>();
+
+        languages.Add("RU", "Русский");
+        languages.Add("EN", "English");
+
         InitDropdown();
     }
 
@@ -19,18 +25,33 @@ public class LocalizationDropdown : MonoBehaviour {
         dropdown.ClearOptions();
 
         List<Dropdown.OptionData> dropdownObj = new List<Dropdown.OptionData>();
+        int value = -1;
 
-        foreach (string name in Localization.GetLocalNames()) {
-            dropdownObj.Add(new Dropdown.OptionData(name));
+        string[] names = Localization.GetLocalNames();
+        for (int i = 0; i < names.Length; i++) {
+            if (languages[names[i]] != null) {
+                dropdownObj.Add(new Dropdown.OptionData(languages[names[i]]));
+
+                if (names[i] == Localization.GetCurrentLocale()) {
+                    value = i;
+                }
+            }
+
         }
 
         dropdown.AddOptions(dropdownObj);
+
+        if (value != -1) {
+            dropdown.value = value;
+        }
 
         dropdown.onValueChanged.AddListener(Localization.ChangeLocale);
     }
 
 
     private void OnDestroy() {
-        dropdown.onValueChanged.RemoveListener(Localization.ChangeLocale);
+        if (dropdown.onValueChanged != null) {
+            dropdown.onValueChanged.RemoveListener(Localization.ChangeLocale);
+        }
     }
 }

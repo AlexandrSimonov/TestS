@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
-using System.Collections.Generic;
 
 /*
  Надо где-то описывать правила
@@ -14,25 +13,40 @@ using System.Collections.Generic;
  Названия ключа должно быть без спец символов и точек
 */
 
-/*
+/* 
+ Поставил под сомнения
  При реализации, мы будем использовать гит для хранения переводов, то есть отдельная ветка в которую можно будет делать переводики
 */
+
+/*
+ Стоит сделать параметизированную локализацию, чтобы можно было подставлять в текст слова и другие ключи в качестве парамметра  
+*/
+
 [CreateAssetMenu(fileName = "Localization", menuName = "SingletonCreate/Localization", order = 1)]
 public class Localization : ScriptableObjectSingleton<Localization> {
 
     public LocalizationLocal[] locales;
-    public LocalizationLocal current = null;
+    private LocalizationLocal current = null;
+
+    public string currentLocale = "";
 
     [HideInInspector]
     public UnityEvent OnChangeLocale;
 
     // Если локаль не используется, то для неё очищаем словарь, чтобы не занимать ОЗУ
-    private void Start() {
+    // Нужна замена на constructor
+    // ПРосто нужно заменить на то чтобы при первом вызове 
+
+    private void Awake() {
+        Debug.Log("Awake");
+        InitLocales();
+    }
+
+    private void OnEnable() {
+        Debug.Log("OnEnable");
         InitLocales();
 
-        if (locales[0] != null) {
-            current = locales[0];
-        }
+        ChangeLocale(currentLocale);
     }
 
     [ContextMenu("Инициализация локалей")]
@@ -44,6 +58,25 @@ public class Localization : ScriptableObjectSingleton<Localization> {
         }
     }
 
+    [ContextMenu("Сменить локаль в редакторе")]
+    public void ChangeLocaleInEditor() {
+        ChangeLocale(currentLocale);
+    }
+
+
+    public static void ChangeLocale(string name) {
+        Instance.current = null;
+
+        foreach (LocalizationLocal local in Instance.locales) {
+            if (name == local.localName) {
+                Instance.current = local;
+                Instance.currentLocale = local.localName;
+            }
+        }
+
+        Instance.OnChangeLocale.Invoke();
+    }
+
     public static void ChangeLocale(int index) {
         Instance.current = null;
         if (Instance.locales[index] != null) {
@@ -51,10 +84,14 @@ public class Localization : ScriptableObjectSingleton<Localization> {
         }
 
         if (Instance.current == null) {
-        //Значит локаль не найдена, нужна ошибка
+            //Значит локаль не найдена, нужна ошибка
         }
 
         Instance.OnChangeLocale.Invoke();
+    }
+
+    public static string GetCurrentLocale() {
+        return Instance.currentLocale;
     }
 
     public static string[] GetLocalNames() {

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using UnityEditor;
 
 public abstract class ScriptableObjectSingleton<T> : ScriptableObject where T : ScriptableObject {
@@ -7,13 +8,14 @@ public abstract class ScriptableObjectSingleton<T> : ScriptableObject where T : 
     protected static T Instance {
         get {
             if (instance == null) {
-                instance = (T)FindObjectOfType(typeof(T));
+                instance = Resources.FindObjectsOfTypeAll<T>().FirstOrDefault();
 
                 if (instance == null) {
-                    Debug.LogError("Singleton error" + typeof(T));
+                    Debug.LogError("Singelton error " + typeof(T));
                 }
             }
             return instance;
         }
     }
+
 }

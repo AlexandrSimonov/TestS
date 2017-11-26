@@ -35,8 +35,8 @@ public class Controller : MonoBehaviour {
         Move();
 
         Jump();
-        
-        Attack();       
+
+        Attack();
 
         direction.y -= gravity * Time.deltaTime;
         controller.Move(direction * Time.deltaTime);
@@ -73,7 +73,7 @@ public class Controller : MonoBehaviour {
         if (Input.GetButton("Fire1")) {
             RaycastHit hit;
 
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3((float)Screen.width / 2, (float)Screen.height / 2, 0));
 
             if (Physics.Raycast(ray, out hit)) {
                 attackComponent.AttackUnit(hit.transform.GetComponent<Damaged>());
@@ -83,7 +83,7 @@ public class Controller : MonoBehaviour {
 
     private void Jump() {
         if (Input.GetButton("Jump") && controller.isGrounded)
-            direction.y = jumpSpeed;    
+            direction.y = jumpSpeed;
     }
 
     private void Reset() {

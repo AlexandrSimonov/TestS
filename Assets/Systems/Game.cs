@@ -12,7 +12,7 @@ public class Game : ScriptableObjectSingleton<Game> {
 
     [HideInInspector]
     public GameState gameState;
-    
+
     void Start() {
         gameState = GameState.Begin;
     }

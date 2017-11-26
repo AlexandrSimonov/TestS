@@ -11,9 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ae6427361f9ca4ab27837063b090ad, type: 3}
   m_Name: Localization
   m_EditorClassIdentifier: 
-  locales: []
-  current:
-    localName: 
+  locales:
+  - localName: EN
+  - localName: RU
+  currentLocale: RU
   OnChangeLocale:
     m_PersistentCalls:
       m_Calls: []
