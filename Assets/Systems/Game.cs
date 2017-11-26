@@ -13,7 +13,8 @@ public class Game : ScriptableObjectSingleton<Game> {
     [HideInInspector]
     public GameState gameState;
 
-    void Start() {
+    public override void Init() {
+        Debug.Log("Game Init");
         gameState = GameState.Begin;
     }
 

@@ -1,4 +1,10 @@
 ﻿{
-	"Options": "OptionsEN",
-	"Start": "StartEN"
+	"SinglePlay" : "Single player",
+	"MultiPlay" : "Multi player",
+	"Records" : "Records",
+ 	"Options" : "Options",
+	"ContactUs" : "Contact us",
+	"Exit" : "Exit",
+	"ContactUsText": "Contact us looooooooong text",
+	"MultiPlayerError" : "Mode multiplayer is not available"
 }

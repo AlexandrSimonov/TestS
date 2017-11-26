@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Reflection;
 
+// Вот эту штуку переделаем под ScriptableObject
 public abstract class Effect : MonoBehaviour, IEffect, IEffectActivate {
 
     public float duration;
@@ -25,7 +26,6 @@ public abstract class Effect : MonoBehaviour, IEffect, IEffectActivate {
         IEffectActivate effect = GetCopyEffect();
         effectActivate.Init(effect);
         effect.OnInitEffect();
-
     }
 
     // Переопрделяется в реализаторе абстрактного класса и вызывается в EventLoop

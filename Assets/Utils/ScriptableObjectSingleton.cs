@@ -1,8 +1,7 @@
 ﻿using System.Linq;
 using UnityEngine;
-using UnityEditor;
 
-public abstract class ScriptableObjectSingleton<T> : ScriptableObject where T : ScriptableObject {
+public abstract class ScriptableObjectSingleton<T> : ScriptableObjectInit where T : ScriptableObjectInit {
     private static T instance = null;
 
     protected static T Instance {
@@ -17,5 +16,7 @@ public abstract class ScriptableObjectSingleton<T> : ScriptableObject where T : 
             return instance;
         }
     }
+
+
 
 }

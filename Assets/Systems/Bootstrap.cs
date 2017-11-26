@@ -3,10 +3,12 @@ using System.Collections;
 
 public class Bootstrap : MonoBehaviour {
 
-    public Localization localization;
+    public ScriptableObjectInit[] singletons;
 
     void Awake() {
-
+        foreach (ScriptableObjectInit singleton in singletons) {
+            singleton.Init();
+        }
     }
 
 }

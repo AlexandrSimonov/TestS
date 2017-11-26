@@ -34,16 +34,10 @@ public class Localization : ScriptableObjectSingleton<Localization> {
     public UnityEvent OnChangeLocale;
 
     // Если локаль не используется, то для неё очищаем словарь, чтобы не занимать ОЗУ
-    // Нужна замена на constructor
-    // ПРосто нужно заменить на то чтобы при первом вызове 
 
-    private void Awake() {
-        Debug.Log("Awake");
-        InitLocales();
-    }
+    public override void Init() {
+        Debug.Log(" Localization Init");
 
-    private void OnEnable() {
-        Debug.Log("OnEnable");
         InitLocales();
 
         ChangeLocale(currentLocale);
