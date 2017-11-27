@@ -117,7 +117,7 @@ public class Localization : ScriptableObjectSingleton<Localization> {
         if (Instance.current.dictionary.TryGetValue(key, out value)) {
             return value;
         } else {
-            Debug.LogWarning("Такой ключ не был найден. Проверьте название секции и ключа");
+            Debug.LogWarning("Такой ключ(" + key + ") не был найден. Проверьте название секции и ключа");
             return GetWordFromKey(key);
         }
     }

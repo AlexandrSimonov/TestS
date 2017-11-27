@@ -1,10 +1,14 @@
 ﻿{
-	"SinglePlay" : "Single player",
-	"MultiPlay" : "Multi player",
-	"Records" : "Records",
- 	"Options" : "Options",
-	"ContactUs" : "Contact us",
-	"Exit" : "Exit",
-	"ContactUsText": "Contact us looooooooong text",
-	"MultiPlayerError" : "Mode multiplayer is not available"
+  "SinglePlay": "Single player",
+  "MultiPlay": "Multi player",
+  "Records": "Records",
+  "Options": "Options",
+  "ContactUs": "Contact us",
+  "Exit": "Exit",
+  "ContactUsText": "Contact us looooooooong text",
+  "MultiPlayerError": "Mode multiplayer is not available",
+  "Menu": "Menu",
+  "Continue": "Continue",
+  "ExitInMenu": "Exit in menu",
+  "Pause": "Pause"
 }

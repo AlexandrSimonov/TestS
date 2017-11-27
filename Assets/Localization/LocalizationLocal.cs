@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 
 [System.Serializable]
-public class LocalizationLocal  {
+public class LocalizationLocal {
     public string localName;
 
     [HideInInspector]
@@ -13,7 +13,7 @@ public class LocalizationLocal  {
 
     public void Init() {
         dictionary.Clear();
-        LoadLocal();      
+        LoadLocal();
     }
 
     // Учаток кода нужндается в тестировании на различных устройствах из возможных проблем с инными от виндовс ОС
@@ -30,17 +30,13 @@ public class LocalizationLocal  {
 
             foreach (string file in files) {
                 try {
-                    StreamReader reader = new StreamReader(file, Encoding.UTF8);
+                    string text = File.ReadAllText(file, Encoding.UTF8);
 
-                    string text = reader.ReadToEnd();
 
-                
                     foreach (KeyValuePair<string, string> st in JsonConvert.DeserializeObject<Dictionary<string, string>>(text)) {
                         // Вот тут стоит уточнить, чтобы не было файлов с непонятными именами, нужно уточнять, что точки в инменах лучше не ставить
                         dictionary.Add(Path.GetFileNameWithoutExtension(file) + "." + st.Key, st.Value);
                     }
-                
-                    reader.Close();
 
                 } catch (JsonException e2) {
                     // Вот тут может быть конект с каким-то баг трекером
