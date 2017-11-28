@@ -6,30 +6,30 @@ public class ColliderEffectActivator : MonoBehaviour {
     public bool deleteInEnd;
     public float delayBeforeActivate;
     private float delayBeforeActivateTimer;
+    //Вот это так не работает
+    //private IEffect[] effects;
 
-    private IEffect[] effects;
+    //void Start() {
+    //     effects = GetComponents<IEffect>();
 
-    void Start() {
-         effects = GetComponents<IEffect>();
-         
-    }
+    //}
 
-    
-    void OnTriggerStay(Collider gameObject) {
-        if (delayBeforeActivate != -1 && delayBeforeActivateTimer > Time.time) {
-            return;
-        }
 
-        EffectActivate act = gameObject.GetComponent<EffectActivate>();
+    //void OnTriggerStay(Collider gameObject) {
+    //    if (delayBeforeActivate != -1 && delayBeforeActivateTimer > Time.time) {
+    //        return;
+    //    }
 
-        foreach (IEffect effect in effects) {
-            effect.InitEffect(act);
-        }
+    //    EffectActivate act = gameObject.GetComponent<EffectActivate>();
 
-        delayBeforeActivateTimer = Time.time + delayBeforeActivate;
-        if (deleteInEnd) {
-            Destroy(this.gameObject);
-        }
-        
-    }
+    //    foreach (IEffect effect in effects) {
+    //        effect.InitEffect(act);
+    //    }
+
+    //    delayBeforeActivateTimer = Time.time + delayBeforeActivate;
+    //    if (deleteInEnd) {
+    //        Destroy(this.gameObject);
+    //    }
+
+    //}
 }

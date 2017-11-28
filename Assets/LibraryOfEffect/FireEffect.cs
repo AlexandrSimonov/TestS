@@ -1,20 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[CreateAssetMenu(fileName = "FireEffect", menuName = "Effects/FireEffect", order = 1)]
 public class FireEffect : Effect {
 
     public float damage;
-    private Hp hp;
 
-    public override void OnInitEffect() {
-        hp = target.GetComponent<Hp>();
-        if (hp == null) {
-            BreakEffect();
-        }
+    public override void Start() {
+        Debug.Log("Fire effect");
     }
 
-    public override void EffectUpdate() {
-        hp.Minus(damage * Time.deltaTime);
+    public override void Update() {
+        Debug.Log("Damage" + damage);
+        Delete();
     }
 
 }
