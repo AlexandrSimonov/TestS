@@ -28,7 +28,7 @@ public class BuildGrid : MonoBehaviour {
 
     }
 
-    
+
 
     // Тестовая подсветка
     //private BuildSection current = null;
@@ -38,7 +38,6 @@ public class BuildGrid : MonoBehaviour {
     public Vector3 tempCenter;
 
     public void TempZone(Vector3 start, int width, int lenght) {
-        Debug.Log((float)width / 4);
         ClearTemp();
 
         currentTempIsEmpty = true;
@@ -61,7 +60,7 @@ public class BuildGrid : MonoBehaviour {
             Vector3 vec = currentTemp[0].obj.transform.position - new Vector3(0.5f, 0, 0.5f);
 
             vec += new Vector3((float)lenght * 0.5f, 0, (float)width * 0.5f);
-            
+
             tempCenter = vec;
         }
     }
@@ -84,33 +83,10 @@ public class BuildGrid : MonoBehaviour {
 
     private BuildSection GetSectionByCoordinate(Vector3 vec) {
         vec -= startPos;
-        
+
         return grid[Mathf.RoundToInt(Mathf.Abs(vec.x)), Mathf.RoundToInt(Mathf.Abs(vec.z))];
     }
 
-    public void Update() {
-        /*
-
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hit, maxDistance: 100)) {
-            BuildSection component = hit.transform.GetComponent<BuildSection>();
-
-            if (component != null) {
-                component.TempActivate();
-
-                if (component != current && current != null) {
-                    current.Default();
-                }
-
-                current = component;
-            }
-        }
-        */
-
-    }
-    // ---------------------
     private void OnDrawGizmosSelected() {
         if (DebugGrid) {
             for (int i = 0; i < height; i++) {

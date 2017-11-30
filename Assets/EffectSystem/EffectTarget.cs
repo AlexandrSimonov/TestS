@@ -22,8 +22,15 @@ public class EffectTarget : MonoBehaviour {
         }
     }
 
+    // Delete effect, вызывается из Effect
     public void Delete(Effect effect) {
         effects.Remove(effect);
-        Debug.Log("Delete");
+        //Debug.Log("Delete");
+    }
+
+    public void DeleteAll() {
+        for (int i = 0; i < effects.Count; i++) {
+            effects[i].Delete();
+        }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
-using UnityEditor;
 
 public abstract class Effect : ScriptableObject {
 

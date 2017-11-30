@@ -15,4 +15,9 @@ public class FireEffect : Effect {
         Delete();
     }
 
+    public override void Delete() {
+        base.Delete();
+
+        Debug.Log("This object is " + this.GetType().ToString() + " deleted");
+    }
 }

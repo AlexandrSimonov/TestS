@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public interface IVisualEffect{
+public interface IVisualEffect {
 
     void Active();
 }

@@ -28,7 +28,7 @@ public class Localization : ScriptableObjectSingleton<Localization> {
     public LocalizationLocal[] locales;
     private LocalizationLocal current = null;
 
-    public string currentLocale = "";
+    public string currentLocale;
 
     [HideInInspector]
     public UnityEvent OnChangeLocale;
@@ -40,7 +40,13 @@ public class Localization : ScriptableObjectSingleton<Localization> {
 
         InitLocales();
 
-        ChangeLocale(currentLocale);
+        string locale = PlayerPrefs.GetString("locale");
+        Debug.Log(locale);
+        if (locale != "") {
+            ChangeLocale(locale);
+        } else {
+            ChangeLocale(currentLocale);
+        }
     }
 
     [ContextMenu("Инициализация локалей")]
@@ -63,18 +69,23 @@ public class Localization : ScriptableObjectSingleton<Localization> {
 
         foreach (LocalizationLocal local in Instance.locales) {
             if (name == local.localName) {
-                Instance.current = local;
-                Instance.currentLocale = local.localName;
+                Instance.ChangeLocaleA(local);
             }
         }
 
         Instance.OnChangeLocale.Invoke();
     }
 
+    private void ChangeLocaleA(LocalizationLocal local) {
+        Instance.current = local;
+        Instance.currentLocale = local.localName;
+        PlayerPrefs.SetString("locale", local.localName);
+    }
+
     public static void ChangeLocale(int index) {
         Instance.current = null;
         if (Instance.locales[index] != null) {
-            Instance.current = Instance.locales[index];
+            Instance.ChangeLocaleA(Instance.locales[index]);
         }
 
         if (Instance.current == null) {

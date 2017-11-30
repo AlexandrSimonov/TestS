@@ -22,8 +22,7 @@ public class LocalizationWindowEditor : EditorWindow {
     private void GetSections() {
         // Вот эта штука не будет работать если не будет, английского языка
         string pathFolder = UtilFunction.PathCombine(new string[] {
-                "Assets",
-                "Resources",
+                Application.streamingAssetsPath,
                 "L10n",
                 "EN"
             });
@@ -91,8 +90,7 @@ public class LocalizationWindowEditor : EditorWindow {
     private void NewKey() {
         // Вот тут будет добавление в локализационные файлы
         string pathFolder = UtilFunction.PathCombine(new string[] {
-                "Assets",
-                "Resources",
+                Application.streamingAssetsPath,
                 "L10n"
             });
 
@@ -116,8 +114,7 @@ public class LocalizationWindowEditor : EditorWindow {
 
     private void NewSection() {
         string pathFolder = UtilFunction.PathCombine(new string[] {
-                "Assets",
-                "Resources",
+                Application.streamingAssetsPath,
                 "L10n"
             });
 

@@ -19,9 +19,12 @@ public class LocalizationLocal {
     // Учаток кода нужндается в тестировании на различных устройствах из возможных проблем с инными от виндовс ОС
     private void LoadLocal() {
         try {
+            /*
+             Для андроида нужно будет делать финт ушами
+             https://docs.unity3d.com/ScriptReference/Application-streamingAssetsPath.html
+             */
             string pathFolder = UtilFunction.PathCombine(new string[] {
-                "Assets",
-                "Resources",
+                Application.streamingAssetsPath,
                 "L10n",
                 localName
             });
