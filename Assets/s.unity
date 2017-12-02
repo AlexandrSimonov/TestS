@@ -4128,7 +4128,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &961315516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6312,7 +6312,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1358426095}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.83, z: 26.61}
+  m_LocalPosition: {x: 0, y: 0.83, z: -1.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 644939778}
@@ -7966,7 +7966,6 @@ GameObject:
   - component: {fileID: 1770887607}
   - component: {fileID: 1770887606}
   - component: {fileID: 1770887605}
-  - component: {fileID: 1770887604}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -7982,27 +7981,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1770887602}
   m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1802943172}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
---- !u!114 &1770887604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114685765836393516, guid: c8d33a4db21f14240a78f0f2f1c9a144,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1770887602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2d195c526af44d41834df254864e52f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  maxAcceleration: 5
-  cameraMode: 0
 --- !u!81 &1770887605
 AudioListener:
   m_ObjectHideFlags: 0
@@ -8277,7 +8261,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1802943171}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.6, y: 29.01, z: 4.6}
+  m_LocalPosition: {x: 0, y: 18, z: -1.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1770887603}
@@ -8295,9 +8279,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2d195c526af44d41834df254864e52f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  maxAcceleration: 10
+  speed: 2
+  target: {fileID: 1358426103}
   cameraMode: 0
+  stop: 0
+  minDistanceZoom: 8
+  maxDistanceZoom: 30
+  zoomSpeed: 100
 --- !u!1 &1807506203
 GameObject:
   m_ObjectHideFlags: 0
