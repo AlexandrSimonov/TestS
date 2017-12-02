@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-// Не класс, а сплошное дерганье
+// V1.0 Не класс, а сплошное дерганье
+// V1.1 уже получше стало
 public class CameraControl : MonoBehaviour {
 
     public float speed = 1;
@@ -42,6 +43,8 @@ public class CameraControl : MonoBehaviour {
             Debug.LogError("Не установлен transform CameraY");
             return;
         }
+
+        CameraDistanceZ();
     }
     // Вот тут можно ограничить выход камеры за поле обзора
 
@@ -72,15 +75,18 @@ public class CameraControl : MonoBehaviour {
     void Update() {
         if (!stop) {
             if (cameraMode == CameraMode.Control) {
-                //Control();
+                Control();
 
                 WarpOnControl();
             }
+
             if (cameraMode == CameraMode.Follow) {
-                //Follow();
+                Follow();
             }
 
             Zoom();
+
+            Rotate();
         }
 
         if (Input.GetKeyDown(KeyCode.Space)) {
@@ -101,28 +107,22 @@ public class CameraControl : MonoBehaviour {
 
         if (warping) {
             transform.position = new Vector3(target.position.x, 0, target.position.z);
-            CameraZ.localPosition = new Vector3(0, 0, -CameraDistance());
+            CameraDistanceZ();
             warping = false;
         }
     }
 
     // Мы должны возвращать смещение для камеры, соответственно, нужно принимать камеру и 
-    private float CameraDistance() {
-        float y = CameraY.position.y; // Расстояние от камеры к игроку
-
+    private void CameraDistanceZ() {
         float ctan = 1 / Mathf.Tan(CameraRotateX.localRotation.eulerAngles.x * (Mathf.PI / 180));
 
-        return ctan * y;
+        CameraZ.localPosition = new Vector3(0, 0, -(ctan * CameraY.localPosition.y));
     }
 
     private void Follow() {
-        Vector3 pos = new Vector3(transform.position.x, 0, transform.position.z);
-        Vector3 tar = new Vector3(target.position.x, 0, CameraDistance());
+        Vector3 tar = new Vector3(target.position.x, 0, target.position.z);
 
-        Vector3 targetCameraPosition = new Vector3(target.position.x, transform.position.y, CameraDistance());
-
-
-        transform.position = Vector3.MoveTowards(transform.position, targetCameraPosition, 300);
+        transform.position = Vector3.MoveTowards(transform.position, tar, 300);
     }
 
     private float border = 2;
@@ -133,21 +133,24 @@ public class CameraControl : MonoBehaviour {
 
     private Vector3 direction = new Vector3(0, 0, 0);
 
-    // Сделать чтобы движение по диагонале, было со скоростью 0,7
+    // Сделать чтобы движение по диагонале, было со скоростью 0,7 - Сделано
     // Нет поддержки тача
+    // Не смотрит на углы, ездит как попало, под наклоном
     private void Control() {
+
         if (Input.mousePosition.x - border <= 0) {
-            direction += Vector3.left;
+            direction += -CameraRotateY.right;
         }
         if (Input.mousePosition.x + border >= Screen.width) {
-            direction += Vector3.right;
+            direction += CameraRotateY.right;
         }
         if (Input.mousePosition.y + border >= Screen.height) {
-            direction += Vector3.forward;
+            direction += CameraRotateY.forward;
         }
         if (Input.mousePosition.y - border <= 0) {
-            direction += Vector3.back;
+            direction += -CameraRotateY.forward;
         }
+
 
         if (direction != Vector3.zero) {
             direction.Normalize();
@@ -173,35 +176,36 @@ public class CameraControl : MonoBehaviour {
     public float maxDistanceZoom = 1;
     public float zoomSpeed = 1;
     // Эта штука работает, но не работает с тачем нормально
+    // Было бы круто добавить инерции
     private void Zoom() {
-        float y = transform.position.y;
+        float y = CameraY.localPosition.y;
         float scrollY = Input.mouseScrollDelta.y;
 
         // Условие того что не нужно двигаться
         if (y <= maxDistanceZoom && y >= minDistanceZoom && scrollY == 0) {
             return;
         }
-        // Нам нужно притянуть y к maxDistance
+
         if (y > maxDistanceZoom) {
-            Zooming(1, 5);
-            Debug.Log("Нужно приблизиться");
-            return;
+            Zooming(maxDistanceZoom, 2);
+        } else if (y < minDistanceZoom) {
+            Zooming(minDistanceZoom, 2);
+        } else {
+            Zooming(CameraY.localPosition.y - scrollY, zoomSpeed);
         }
-        // Нам нужно притянуть y к minDistance
-        if (y < minDistanceZoom) {
-            Zooming(-1, 5);
-            Debug.Log("Нужно отдалиться");
-            return;
-        }
-
-
-        Zooming(scrollY, zoomSpeed);
-        Debug.Log("Есть управление");
-
+        CameraDistanceZ();
     }
 
-    private void Zooming(float direction, float speed) {
-        /*Vector3 target = transform.position + Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)).direction * direction;
-        transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);*/
+    private void Zooming(float h, float speed) {
+        Vector3 targetZoom = new Vector3(0, h, 0);
+        CameraY.localPosition = Vector3.MoveTowards(CameraY.localPosition, targetZoom, speed * Time.deltaTime);
+    }
+
+    public float CameraRotationSpeed = 1;
+    private void Rotate() {
+        if (Input.GetMouseButton(2)) {
+            float delta = Input.GetAxis("Mouse X");
+            CameraRotateY.localRotation = Quaternion.Euler(0, CameraRotateY.localRotation.eulerAngles.y + CameraRotationSpeed * delta, 0);
+        }
     }
 }
