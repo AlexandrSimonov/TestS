@@ -33,7 +33,7 @@ public class Inventory : MonoBehaviour {
         itemInit = null;
         world = GameObject.FindGameObjectWithTag("World").transform;
     }
-    
+
     public void AddItem(Item item) {
         if (IsCanTake(item)) {
             item.SetOwner(Owner);
@@ -57,12 +57,12 @@ public class Inventory : MonoBehaviour {
 
     public bool IsCanTake(Item item) {
         if (currentWeight + item.weight > maxWeight) {
-            DialogSystem.AddMessage("Слишком большой вес", 2);
+            Notification.CreateNotification(Notification.NotificationPriority.Middle, "Слишком большой вес");
             return false;
         }
 
         if (currentCountItem + 1 > maxCountItem) {
-            DialogSystem.AddMessage("Недостаточно места в сумке", 2);
+            Notification.CreateNotification(Notification.NotificationPriority.Middle, "Недостаточно места в сумке");
             return false;
         }
 

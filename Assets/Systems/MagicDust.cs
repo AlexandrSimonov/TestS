@@ -19,11 +19,11 @@ public class MagicDust : MonoBehaviourSingelton<MagicDust> {
         //Возможно нужно сделать событие чтобы в магазине менялось кол-во денег, при покупке и в инвентаре
         Instance.text.text = "" + Instance.money;
     }
-    
+
     public static void Minus(int mon) {
         if (IsCanBuy(mon)) {
             Set(-mon);
-        } 
+        }
     }
 
     public static void Plus(int mon) {
@@ -31,8 +31,10 @@ public class MagicDust : MonoBehaviourSingelton<MagicDust> {
     }
 
     public static bool IsCanBuy(int mon) {
-        if (Instance.money >= mon) return true;
-        DialogSystem.AddMessage("Недостаточно денег", 2);
+        if (Instance.money >= mon)
+            return true;
+
+        Notification.CreateNotification(Notification.NotificationPriority.Middle, "Недостаточно денег");
         return false;
     }
 }

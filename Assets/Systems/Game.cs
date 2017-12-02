@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[CreateAssetMenu(fileName = "Game", menuName = "SingletonCreate/Game", order = 1)]
-public class Game : ScriptableObjectSingleton<Game> {
+public class Game : MonoBehaviourSingelton<Game> {
 
     public enum GameState {
         Begin,
@@ -13,13 +12,13 @@ public class Game : ScriptableObjectSingleton<Game> {
     [HideInInspector]
     public GameState gameState;
 
-    public override void Init() {
-        Debug.Log("Game Init");
+    private void Start() {
         gameState = GameState.Begin;
     }
 
-    public static void GamePlay() {
+    public void GamePlay() {
         Instance.gameState = GameState.Play;
+        Notification.CreateNotification(Notification.NotificationPriority.Low, "Игра началась");
     }
 
     public static void GameOver() {

@@ -3,20 +3,18 @@ using System.Collections;
 
 public class NotificationList : MonoBehaviour {
 
+    public NotificationDisplay notificationObject;
+    public Transform notificationParent;
+
     void Start() {
         NotificationMagazine.OnAddEvent.AddListener(AddNotification);
-        NotificationMagazine.OnRemoveEvent.AddListener(RemoveNotification);
     }
 
 
     private void AddNotification(Notification notification) {
-        // Instantiate обджект и т.д
-        // Вот тут устанавливается таймер, чтобы удалять из листа по тику времени
+        Debug.Log("Новое уведомление");
+        NotificationDisplay go = Instantiate(notificationObject, notificationParent);
+        go.Init(notification);
     }
 
-    private void RemoveNotification(Notification notification) {
-        // Destroy обджект и т.д
-    }
-
-    
 }

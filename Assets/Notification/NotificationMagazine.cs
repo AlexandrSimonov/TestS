@@ -7,11 +7,11 @@ public class NotificationMagazine : MonoBehaviourSingelton<NotificationMagazine>
 
     private RxList<Notification> notifications;
 
-    private void Start() {
+    private void Awake() {
         notifications = new RxList<Notification>();
     }
 
-    public static RxList<Notification>.RxEvent OnAddEvent{
+    public static RxList<Notification>.RxEvent OnAddEvent {
         get {
             return Instance.notifications.OnAddEvent;
         }

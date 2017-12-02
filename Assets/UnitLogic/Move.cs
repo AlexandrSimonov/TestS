@@ -8,7 +8,6 @@ public class Move : MonoBehaviour {
 
     private NavMeshAgent agent;
 
-    private bool move = false;
     private Vector3 direction;
     Vector3 nextTarget; // Эта точка указывает куда сейчас должен двигаться юнит
 

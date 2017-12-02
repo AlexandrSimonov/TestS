@@ -15,8 +15,12 @@ public class Notification {
     public Notification(NotificationPriority priority, string text) {
         this.priority = priority;
         this.text = text;
+    }
 
-        NotificationMagazine.AddNotification(this);
+    public static void CreateNotification(NotificationPriority priority, string text) {
+        Notification notification = new Notification(priority, text);
+
+        NotificationMagazine.AddNotification(notification);
     }
 
     public void Delete() {

@@ -16,7 +16,7 @@ public class WaveControl : MonoBehaviourSingelton<WaveControl> {
     public Transform parentMonster;
 
     private int strongWave;
-    
+
 
     public List<Monster> waveMonster;
 
@@ -48,17 +48,17 @@ public class WaveControl : MonoBehaviourSingelton<WaveControl> {
         while (currentStrong != strongWave) {
             Monster monster = GetRandomMonster(strongWave - currentStrong);
             // Вот тут не правльно и нужно выбирать случайную позицию
-            waveMonster.Add(Instantiate(monster.gameObject, new Vector3(0,0,0), new Quaternion(0, 0, 0, 0), parentMonster).GetComponent<Monster>());
+            waveMonster.Add(Instantiate(monster.gameObject, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), parentMonster).GetComponent<Monster>());
 
             currentStrong += monster.strong;
-        } 
+        }
     }
 
-    
+
 
     private Monster GetRandomMonster(int canStrong) {
         Monster[] canMonsters = monsters.Where(monster => monster.strong <= canStrong).ToArray();
-        
+
         return canMonsters[Random.Range(0, canMonsters.Length)];
     }
 
@@ -73,7 +73,7 @@ public class WaveControl : MonoBehaviourSingelton<WaveControl> {
     }
 
     private void OnEnd() {
-        DialogSystem.AddMessage("Конец волны", 4);
+        Notification.CreateNotification(Notification.NotificationPriority.Middle, "Конец волны");
         MagicDust.Plus(100);
         strongWave += 5;
     }
