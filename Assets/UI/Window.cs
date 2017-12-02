@@ -19,7 +19,7 @@ public class Window : MonoBehaviour {
         StateChange();
     }
 
-    
+
     [ContextMenu("Close")]
     public void Close() {
         isOpened = false;
@@ -33,7 +33,13 @@ public class Window : MonoBehaviour {
     }
 
     private void StateChange() {
-        mask.SetActive(isOpened);
-        window.SetActive(isOpened);
+        if (mask != null) {
+            mask.SetActive(isOpened);
+        }
+        if (window != null) {
+            window.SetActive(isOpened);
+        } else {
+            Debug.LogError("Ошибка с окном " + this);
+        }
     }
 }
