@@ -1,5 +1,6 @@
 ﻿{
-	"Close" : "Close",
-	"Cancel" : "Cancel",
-	"Ok" : "Ok"
+  "Close": "Close",
+  "Cancel": "Cancel",
+  "Ok": "Ok",
+  "fps": ""
 }

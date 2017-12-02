@@ -17,9 +17,10 @@ public class FPS : MonoBehaviour {
 
     void Update() {
         arr[index] = 1.0f / Time.deltaTime;
+
         index++;
 
-        if (index == elem - 1) {
+        if (index == elem) {
             fpsCounter.text = "FPS - " + Mathf.RoundToInt(Avarage());
 
             index = 0;
