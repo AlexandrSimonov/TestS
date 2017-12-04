@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Game : MonoBehaviourSingelton<Game> {
 
+    public Window gameOverWindow;
+
     public enum GameState {
         Begin,
         Play,
@@ -23,5 +25,7 @@ public class Game : MonoBehaviourSingelton<Game> {
 
     public static void GameOver() {
         Instance.gameState = GameState.GameOver;
+        Notification.CreateNotification(Notification.NotificationPriority.High, "Игра окончена");
+        Instance.gameOverWindow.Open();
     }
 }

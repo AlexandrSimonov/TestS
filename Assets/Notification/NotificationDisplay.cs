@@ -28,7 +28,15 @@ public class NotificationDisplay : MonoBehaviour {
             image.color = high;
         }
 
-        timeDel = Time.time + 8;
+        float time = 0;
+        // Потом заменим на какую-то более приемлимую альтернативу
+
+        foreach (char c in notification.text) {
+            time += 0.05f;
+        }
+        time += 1;
+
+        timeDel = Time.time + time;
 
     }
 

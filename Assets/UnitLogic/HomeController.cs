@@ -8,7 +8,7 @@ public class HomeController : MonoBehaviour {
         hp = GetComponent<Hp>();
 
         hp.OnHpChangeMinusEvent.AddListener(AttackNotification);
-
+        hp.OnHpChangeMinusEvent.AddListener(AttackDebug);
         hp.OnHpDieEvent.AddListener(HomeDie);
     }
 
@@ -22,8 +22,13 @@ public class HomeController : MonoBehaviour {
         }
     }
 
+    private void AttackDebug(float healthPoint) {
+        Debug.Log(hp.hp);
+    }
+
     private void HomeDie() {
         Game.GameOver();
+
         Debug.Log("Вы проиграли");
     }
 

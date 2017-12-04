@@ -12,7 +12,6 @@ public class NotificationList : MonoBehaviour {
 
 
     private void AddNotification(Notification notification) {
-        Debug.Log("Новое уведомление");
         NotificationDisplay go = Instantiate(notificationObject, notificationParent);
         go.Init(notification);
     }

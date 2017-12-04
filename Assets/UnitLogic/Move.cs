@@ -8,6 +8,8 @@ public class Move : MonoBehaviour {
 
     private NavMeshAgent agent;
 
+    public Animator animator;
+
     private Vector3 direction;
     Vector3 nextTarget; // Эта точка указывает куда сейчас должен двигаться юнит
 
@@ -31,7 +33,10 @@ public class Move : MonoBehaviour {
             Vector3 posSteering = new Vector3(agent.steeringTarget.x, 0, agent.steeringTarget.z);
             Vector3 posObj = new Vector3(transform.position.x, 0, transform.position.z);
 
+            animator.SetBool("walk", false);
+
             if (Vector3.Distance(posObj, posSteering) > 0.01f) {
+                animator.SetBool("walk", true);
                 direction = agent.steeringTarget - transform.position;
 
                 direction.y = 0;

@@ -10,16 +10,18 @@ public class MonsterController : MonoBehaviour {
         Kill
     }
 
-    public GameObject target;
+    public Damaged target;
     private NavMeshAgent agent;
-    private Hp hp; 
-    
+    private Hp hp;
+    private Attack attack;
+
     // Use this for initialization
     void Start() {
         agent = GetComponent<NavMeshAgent>();
-        agent.SetDestination(target.transform.position);
         hp = GetComponent<Hp>();
+        attack = GetComponent<Attack>();
 
+        agent.SetDestination(target.transform.position);
         hp.OnHpDieEvent.AddListener(Die);
     }
 
@@ -31,13 +33,13 @@ public class MonsterController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         RaycastHit hit;
-        Vector3 fwd = transform.TransformDirection(Vector3.forward);
-        
-        if (Physics.Raycast(this.transform.position, fwd, out hit, maxDistance: 1f)) {
 
-            if (hit.transform.name == target.transform.name && hit.distance < 0.5f) {
+        if (Physics.Raycast(this.transform.position, transform.forward, out hit, maxDistance: 10f)) {
+
+            if (hit.transform.name == target.transform.name && hit.distance < 1f) {
                 agent.velocity = Vector3.zero;
                 agent.isStopped = true;
+                attack.AttackUnit(target);
             }
         }
     }

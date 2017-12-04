@@ -122,7 +122,8 @@ public class LocalizationWindowEditor : EditorWindow {
 
         foreach (string locale in locales) {
             FileStream stream = File.Create(Path.Combine(locale, sectionName + ".json"));
-            // Нужно сюда записать {}
+            byte[] str = new UTF8Encoding().GetBytes("{}");
+            stream.Write(str, 0, str.Length);
             stream.Close();
         }
 
