@@ -11,7 +11,6 @@ public class Move : MonoBehaviour {
     public Animator animator;
 
     private Vector3 direction;
-    Vector3 nextTarget; // Эта точка указывает куда сейчас должен двигаться юнит
 
     void Start() {
         agent = GetComponent<NavMeshAgent>();

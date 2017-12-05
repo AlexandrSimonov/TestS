@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ThrowPanel : MonoBehaviour{
+public class ThrowPanel : MonoBehaviour {
 
     public Slider slider;
     public Text countText;
 
-    private Item item;
     private int value;
 
     private void Awake() {

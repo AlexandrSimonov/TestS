@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 // Используем класс для "классификации монстров"
 public class Monster : MonoBehaviour {
